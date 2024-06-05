@@ -1,0 +1,13 @@
+on: push
+
+permissions:
+  contents: write
+
+jobs:
+  job1:
+    runs-on: ubuntu-latest
+    steps:
+    - run: pwd
+    - uses: actions/checkout@v4
+    - name: install modules
+      run: cd frontend && npm install
