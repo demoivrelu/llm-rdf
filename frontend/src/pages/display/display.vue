@@ -300,7 +300,7 @@
 import axios from "axios";
 import Vue from "vue";
 import * as echarts from "echarts";
-import conf from "../../../vue.config";
+import conf from "../../config";
 Vue.prototype.$echarts = echarts;
 import DevicePixelRatio from '../../utils/devicePixelRatio'
 import draggable from '../../utils/draggable';

@@ -51,7 +51,8 @@
                         <a href="https://chat.openai.com/g/g-bo0FiWLY7-consensus" id="Literature Scouter" target="_blank" style="display: '' ;">
                             <el-card  shadow="hover" class="card" >
                                 <div style="position: relative;">
-                                    <el-image :src="'./img/img/Literature Scouter.png'" class="aiicon"></el-image>
+                                    <el-image style="position: absolute;" :src="require('@/assets/img/img/Literature Scouter.png')" class="aiicon"></el-image>
+                                    <!-- <el-image :src="'./img/img/Literature Scouter.png'" class="aiicon"></el-image> -->
                                     <div style="position: absolute; margin-left: 44%; font-size: x-large;">Literature Scouter&nbsp;</div>
                                 </div>
                             </el-card>
@@ -59,13 +60,13 @@
                         <a href="https://chat.openai.com/g/g-OUHuCwRyT-experiment-designer" id="Experiment Designer" target="_blank" style="display:'';" @click="choice()">
                             <el-card shadow="hover" class="card" >
                                 <div v-if="!disp" style="position: relative;">
-                                    <el-image :src="'./img/img/Experiment Designer.png'" class="aiicon"></el-image>
+                                    <el-image style="position: absolute;" :src="require('@/assets/img/img/Experiment Designer.png')" class="aiicon"></el-image>
                                     <div style="position: absolute; margin-left: 44%; font-size: x-large;">Experiment Designer&nbsp;</div>
                                 </div>
                                 <div v-if="disp" style="position: relative;">
-                                    <el-image :src="'./img/img/Experiment Designer.png'" class="aiicon" style="margin-left: -40%"></el-image>
+                                    <el-image :src="require('@/assets/img/img/Experiment Designer.png')" class="aiicon" style="position: absolute;margin-left: -40%"></el-image>
                                     <div style="position: absolute; margin-left: 24%; font-size: x-large;">Experiment Designer&nbsp; </div>
-                                    <el-image :src="'./img/img/Hardware Executor.png'" class="aiicon" style="margin-left: 4%"></el-image>
+                                    <el-image :src="require('@/assets/img/img/Hardware Executor.png')" class="aiicon" style="position: absolute;margin-left: 4%"></el-image>
                                     <div style="position: absolute; margin-left: 68%; font-size: x-large;">Hardware Executor&nbsp;</div>
                                 </div>
                             </el-card>
@@ -73,7 +74,7 @@
                         <a href="https://chat.openai.com/g/g-OMRkTl59T-hardware-executor" id="Hardware Executor" target="_blank" style="display:'';">
                             <el-card shadow="hover" class="card" >
                                 <div style="position: relative;">
-                                    <el-image :src="'./img/img/Hardware Executor.png'" class="aiicon"></el-image>
+                                    <el-image style="position: absolute;" :src="require('@/assets/img/img/Hardware Executor.png')" class="aiicon"></el-image>
                                     <div style="position: absolute; margin-left: 44%; font-size: x-large;">Hardware Executor&nbsp;</div>
                                 </div>
                             </el-card>
@@ -81,7 +82,7 @@
                         <a href="https://chat.openai.com/g/g-2csRbBPhx-spectrum-analyzer" id="Spectrum Analyzer" target="_blank" style="display:'';">
                             <el-card shadow="hover" class="card" >
                                 <div style="position: relative;">
-                                    <el-image :src="'./img/img/Spectrum Analyzer.png'" class="aiicon"></el-image>
+                                    <el-image style="position: absolute;" :src="require('@/assets/img/img/Spectrum Analyzer.png')" class="aiicon"></el-image>
                                     <div style="position: absolute; margin-left: 44%; font-size: x-large;">Spectrum Analyzer&nbsp;</div>
                                 </div>
                             </el-card>
@@ -89,7 +90,7 @@
                         <a href="https://chat.openai.com/g/g-6CFis5e6M-separation-instructor" id="Separation Instructor" target="_blank" style="display:'';">
                             <el-card shadow="hover" class="card" >
                                 <div style="position: relative;">
-                                    <el-image :src="'./img/img/Separation Instructor.png'" class="aiicon"></el-image>
+                                    <el-image style="position: absolute;" :src="require('@/assets/img/img/Separation Instructor.png')" class="aiicon"></el-image>
                                     <div style="position: absolute; margin-left: 44%; font-size: x-large;">Separation Instructor&nbsp;</div>
                                 </div>
                             </el-card>
@@ -97,7 +98,7 @@
                         <a href="https://chat.openai.com/g/g-MZZcJU43f-result-interpreter" id="Result Interpreter" target="_blank" style="display:'';">
                             <el-card shadow="hover" class="card" >
                                 <div style="position: relative;">
-                                    <el-image :src="'./img/img/Result Interpreter.png'" class="aiicon"></el-image>
+                                    <el-image style="position: absolute;" :src="require('@/assets/img/img/Result Interpreter.png')" class="aiicon"></el-image>
                                     <div style="position: absolute; margin-left: 44%; font-size: x-large;">Result Interpreter&nbsp;</div>
                                 </div>
                             </el-card>
@@ -119,7 +120,6 @@
                 </el-tab-pane>
             </el-tabs>
         </el-row>
-        
     </div>
 </template>
 

@@ -86,7 +86,7 @@ export default G6 => {
           },
           {
             repeat: true,
-            duration: 500,
+            duration: 1800,
             easing: 'easeCubic',
             delay: 0,
           },
@@ -140,7 +140,7 @@ export default G6 => {
           },
           {
             repeat: true,
-            duration: 500,
+            duration: 1800,
             easing: 'easeCubic',
             delay: 0,
           },
@@ -232,7 +232,7 @@ export default G6 => {
         },
         {
           repeat: true,
-          duration: 500,
+          duration: 1800,
           delay: 0,
         },
       );
@@ -278,7 +278,7 @@ export default G6 => {
         },
         {
           repeat: true,
-          duration: 500,
+          duration: 1800,
           delay: 0,
         },
       );
@@ -361,7 +361,7 @@ export default G6 => {
         },
         {
           repeat: true,
-          duration: 500,
+          duration: 1800,
           delay: 0,
         },
       );
@@ -402,7 +402,7 @@ export default G6 => {
         },
         {
           repeat: true,
-          duration: 500,
+          duration: 1800,
           delay: 0,
         },
       );
@@ -520,7 +520,7 @@ export default G6 => {
         },
         {
           repeat: true,
-          duration: 500,
+          duration: 1800,
           delay: 0,
         },
       );
@@ -572,7 +572,7 @@ export default G6 => {
         },
         {
           repeat: true,
-          duration: 500,
+          duration: 1800,
           delay: 0,
         },
       );
@@ -704,7 +704,7 @@ export default G6 => {
         },
         {
           repeat: true,
-          duration: 500,
+          duration: 1800,
           delay: 0,
         },
       );
@@ -782,7 +782,7 @@ export default G6 => {
         },
         {
           repeat: true,
-          duration: 500,
+          duration: 1800,
           delay: 0,
         },
       );

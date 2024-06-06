@@ -203,7 +203,7 @@
 
 <script>
 import DevicePixelRatio from '../../utils/devicePixelRatio'
-import conf from "../../../vue.config"
+import conf from "../../config"
 import axios from "axios";
 
 export default {

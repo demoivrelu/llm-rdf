@@ -74,7 +74,7 @@
 
 <script>
 import axios from "axios";
-import conf from "../../../vue.config";
+import conf from "../../config";
 import * as echarts from "echarts";
 
 export default {

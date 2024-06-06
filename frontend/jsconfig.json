@@ -1,18 +1,19 @@
 {
-    "compilerOptions": {
-        "baseUrl": "./",
-        "paths": {
-            "@": ["./"],
-            "@src": ["./src"],
-            "@assets": ["src/assets"],
-            "@comp": ["src/components"],
-            "@styles": ["src/assets/styles"],
-            "@views": ["src/views"]
-        },
-        "target": "es6",
-        "module": "es6",
-        "allowSyntheticDefaultImports": true
+  "compilerOptions": {
+    "target": "es5",
+    "module": "esnext",
+    "baseUrl": "./",
+    "moduleResolution": "node",
+    "paths": {
+      "@/*": [
+        "src/*"
+      ]
     },
-    "include": ["src/**/*"],
-    "exclude": ["node_modules", "dist", ".git"]
+    "lib": [
+      "esnext",
+      "dom",
+      "dom.iterable",
+      "scripthost"
+    ]
+  }
 }

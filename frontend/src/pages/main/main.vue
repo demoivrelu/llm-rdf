@@ -4,6 +4,7 @@
         <div v-loading="loadingProject"
             :style="{ position: 'relative', width: fixWidth + 'px', height: fixHeight + 'px', backgroundColor: '#f4f5f6', overflow: 'hidden' }">
             <el-row :style="{ height: '65px', backgroundColor: sideBarColor, borderBottom: 1 + 'px solid #c7c7c7' }">
+                
                 <div class="logo" :style="{ color: logoColor }">
                     {{ iconTitle }}
                 </div>
@@ -58,23 +59,23 @@
                 <el-dialog custom-class="help-dialog" :top="'80px'" :title="headerTool[1].name" :visible.sync="dialogHelpVisible" v-draggable>
                     <el-carousel indicator-position="none" :autoplay='false' :width="'800px'" :height="'640px'" >
                         <el-carousel-item>
-                            <el-image src="./img/help/00-homepage.png"></el-image>
+                            <el-image :src="require('@/assets/img/help/00-homepage.png')"/>
                             <div class="help-title">Homepage</div>
                         </el-carousel-item>
                         <el-carousel-item>
-                            <el-image src="./img/help/02-Function.png"></el-image>
+                            <el-image :src="require('@/assets/img/help/02-Function.png')"></el-image>
                             <div class="help-title">Function</div>
                         </el-carousel-item>
                         <el-carousel-item>
-                            <el-image src="./img/help/03-Display.png"></el-image>
+                            <el-image :src="require('@/assets/img/help/03-Display.png')"></el-image>
                             <div class="help-title">Display</div>
                         </el-carousel-item>
                         <el-carousel-item>
-                            <el-image src="./img/help/04-Projects.png"></el-image>
+                            <el-image :src="require('@/assets/img/help/04-Projects.png')"></el-image>
                             <div class="help-title">Projects</div>
                         </el-carousel-item>
                         <el-carousel-item>
-                            <el-image src="./img/help/06-Library.png"></el-image>
+                            <el-image :src="require('@/assets/img/help/06-Library.png')"></el-image>
                             <div class="help-title">Library</div>
                         </el-carousel-item>
                     </el-carousel>
@@ -110,11 +111,11 @@
                 </el-dialog>
                 <el-dialog  title="Avatar" :visible.sync="avatarVisible" v-draggable>
                     <div>
-                        <a><el-image style="margin:20px" src="./img/img/GitHub.png" @click="avatarVisible =false; changeAtatar('./img/img/GitHub.png')"></el-image> </a>
-                        <a><el-image style="margin:20px" src="./img/img/Avatar-111.png" @click="avatarVisible =false;changeAtatar('./img/img/Avatar-111.png')"></el-image> </a>
-                        <a><el-image style="margin:20px" src="./img/img/Avatar-222.png" @click="avatarVisible =false;changeAtatar('./img/img/Avatar-222.png')"></el-image> </a>
-                        <a><el-image style="margin:20px" src="./img/img/Avatar-333.png" @click="avatarVisible =false;changeAtatar('./img/img/Avatar-333.png')"></el-image> </a>
-                        <a><el-image style="margin:20px" src="./img/img/Avatar-444.png" @click="avatarVisible =false;changeAtatar('./img/img/Avatar-444.png')"></el-image> </a>
+                        <a><el-image style="margin:20px" :src="require('@/assets/img/img/GitHub.png')" @click="avatarVisible =false; changeAtatar('./img/img/GitHub.png')"></el-image> </a>
+                        <a><el-image style="margin:20px" :src="require('@/assets/img/img/Avatar-111.png')" @click="avatarVisible =false;changeAtatar('./img/img/Avatar-111.png')"></el-image> </a>
+                        <a><el-image style="margin:20px" :src="require('@/assets/img/img/Avatar-222.png')" @click="avatarVisible =false;changeAtatar('./img/img/Avatar-222.png')"></el-image> </a>
+                        <a><el-image style="margin:20px" :src="require('@/assets/img/img/Avatar-333.png')" @click="avatarVisible =false;changeAtatar('./img/img/Avatar-333.png')"></el-image> </a>
+                        <a><el-image style="margin:20px" :src="require('@/assets/img/img/Avatar-444.png')" @click="avatarVisible =false;changeAtatar('./img/img/Avatar-444.png')"></el-image> </a>
                     </div>                  
                 </el-dialog>
             </el-row>
@@ -257,114 +258,221 @@
                     </div>
                 </el-col>
                 <el-col :span="21">
-                    <div style=" margin-top:-19px;">
+                    <div style=" margin-top:-15px;">
                         <div :style="{ position: 'relative', backgroundColor: contentColor }">
-                            <div id="home" v-loading="loadingProject">
-                                <div :style="{ height: menuHeight + 'px' }" style="margin-left: 20px; margin-right:20px;">
-                                    <div style="margin-top : 20px">
 
-                                        <div class="container">
-                                            <!--Method Search-->
-                                            <div class="card">
-                                                <div class="img">
-                                                    <a @click="toOpenWebUI('literature search')">
-                                                        <el-image src="./img/img/method search.png"></el-image>
-                                                    </a>
-                                                </div>
-                                                <div class="h2">
-                                                    {{ functionsList[4].title }}
-                                                </div>
-                                                <div class="content">
-                                                    <p>{{ functionsList[4].description }}</p>
-                                                    <a href="#">{{ functionsList[4].btn }}</a>
+                            <el-tabs v-model="activeName" ref="tabs" >
+                                <el-tab-pane name="first">
+                                    <div id="home" v-loading="loadingProject">
+                                        <div :style="{ height: menuHeight + 'px' }" style="margin-left: 20px; margin-right:20px;">
+                                            <div style="margin-top : 20px">
+
+                                                <div class="container">
+                                                    <!--Method Search-->
+                                                    <div class="card">
+                                                        <div class="img">
+                                                            <a @click="toOpenWebUI('literature search')">
+                                                                <el-image :src="require('@/assets/img/img/method search.png')"></el-image>
+                                                            </a>
+                                                        </div>
+                                                        <div class="h2">
+                                                            {{ functionsList[4].title }}
+                                                        </div>
+                                                        <div class="content">
+                                                            <p>{{ functionsList[4].description }}</p>
+                                                            <a href="#">{{ functionsList[4].btn }}</a>
+                                                        </div>
+                                                    </div>
+                                                    <!--Screening-->
+                                                    <div class="card">
+                                                        <div class="img">
+                                                            <a @click="toOpenWebUI('screening')" >
+                                                                <el-image :src="require('@/assets/img/img/screen.png')" ></el-image>
+                                                            </a>
+                                                        </div>
+                                                        <div class="h2">
+                                                            {{ functionsList[1].title }}
+                                                        </div>
+                                                        <div class="content">
+                                                            <p>{{ functionsList[1].description }}</p>
+                                                            <a href="#" >{{
+                                                                functionsList[1].btn }}</a>
+                                                        </div>
+                                                    </div>
+                                                    <!--Kinetics-->
+                                                    <div class="card">
+                                                        <div class="img">
+                                                            <a @click="toOpenWebUI('kinetics')">
+                                                                <el-image :src="require('@/assets/img/img/kinetics.png')"></el-image>
+                                                            </a>
+                                                        </div>
+                                                        <div class="h2">
+                                                            {{ functionsList[3].title }}
+                                                        </div>
+                                                        <div class="content">
+                                                            <p>{{ functionsList[3].description }}</p>
+                                                            <a href="#">{{ functionsList[3].btn }}</a>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <!--Screening-->
-                                            <div class="card">
-                                                <div class="img">
-                                                    <a @click="toOpenWebUI('screening')" >
-                                                        <el-image src="./img/img/screen.png" ></el-image>
-                                                    </a>
-                                                </div>
-                                                <div class="h2">
-                                                    {{ functionsList[1].title }}
-                                                </div>
-                                                <div class="content">
-                                                    <p>{{ functionsList[1].description }}</p>
-                                                    <a href="#" >{{
-                                                        functionsList[1].btn }}</a>
-                                                </div>
-                                            </div>
-                                            <!--Kinetics-->
-                                            <div class="card">
-                                                <div class="img">
-                                                    <a @click="toOpenWebUI('kinetics')">
-                                                        <el-image src="./img/img/kinetics.png"></el-image>
-                                                    </a>
-                                                </div>
-                                                <div class="h2">
-                                                    {{ functionsList[3].title }}
-                                                </div>
-                                                <div class="content">
-                                                    <p>{{ functionsList[3].description }}</p>
-                                                    <a href="#">{{ functionsList[3].btn }}</a>
+
+                                            <div class="card-gap">
+                                                <div class="container">
+                                                    <!--Optimization-->
+                                                    <div class="card">
+                                                        <div class="img">
+                                                            <a @click="toOpenWebUI('optimization')">
+                                                                <el-image :src="require('@/assets/img/img/optimization.png')"></el-image>
+                                                            </a>
+                                                        </div>
+                                                        <div class="h2">
+                                                            {{ functionsList[0].title }}
+                                                        </div>
+                                                        <div class="content">
+                                                            <p>{{ functionsList[0].description }}</p>
+                                                            <a href="#" @click="dialogOptimizationDetail = true">{{ functionsList[0].btn }}</a>
+                                                        </div>
+                                                    </div>
+                                                    <!--Scale-up-->
+                                                    <div class="card">
+                                                        <div class="img">
+                                                            <a  @click="toOpenWebUI('scale-up')" >
+                                                                <el-image :src="require('@/assets/img/img/scale-up.png')" ></el-image>
+                                                            </a>
+                                                        </div>
+                                                        <div class="h2">
+                                                            {{ functionsList[2].title }}
+                                                        </div>
+                                                        <div class="content">
+                                                            <p>{{ functionsList[2].description }}</p>
+                                                            <a href="#" @click="dialogOptimizationDetail = true">{{
+                                                                functionsList[2].btn }}</a>
+                                                        </div>
+                                                    </div>
+                                                    <!--Purification-->
+                                                    <div class="card">
+                                                        <div class="img">
+                                                            <a @click="toOpenWebUI('purification')">
+                                                                <el-image :src="require('@/assets/img/img/purification.png')"></el-image>
+                                                            </a>
+                                                        </div>
+                                                        <div class="h2">
+                                                            {{ functionsList[5].title }}
+                                                        </div>
+                                                        <div class="content">
+                                                            <p>{{ functionsList[5].description }}</p>
+                                                            <a href="#">{{ functionsList[5].btn }}</a>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+                                </el-tab-pane>
 
-                                    <div class="card-gap">
-                                        <div class="container">
-                                            <!--Optimization-->
-                                            <div class="card">
-                                                <div class="img">
-                                                    <a @click="toOpenWebUI('optimization')">
-                                                        <el-image src="./img/img/optimization.png"></el-image>
+                                <el-tab-pane name="second">
+                                    <!-- <openwebui/> -->
+                                    <iframe id="3rdPartUI-page" ref="3rdPartUI-dom" frameborder="1" scrolling="no"
+                                        :style="{ width: moduleWidth + 300 + 'px', height: moduleHeight + 300 + 'px', marginRight: 10 + '%', marginLeft: 0 + '%', marginTop: '-18px', marginRight: 10 + '%',  }"
+                                        src="/#/3rdPartAI">
+                                    </iframe>
+                                </el-tab-pane>
+
+                                <el-tab-pane name="third">
+                                    <iframe id="frames" ref="optimization-dom" frameborder="0" scrolling="no"
+                                        :style="{ width: moduleWidth + 300 + 'px', height: moduleHeight + 300 + 'px', marginLeft: -13 + '%',}"
+                                        src="/#/ai">
+                                    </iframe>
+                                </el-tab-pane>
+
+                                <el-tab-pane name="fourth">
+                                    <div id="project"
+                                        :style="{ position: 'relative', backgroundColor: contentColor, marginTop: 20 + 'px', height: fixHeight * 0.955 + 'px', }">
+                                        <div style="margin-left: 3%; position: relative;">
+                                            <el-autocomplete v-model="value_" :fetch-suggestions="querySearch" ref="autoRef" @focus="searchFocus"
+                                                style="margin-top: 20px; margin-bottom: 6px;width:40%;border-radius: 20px;" 
+                                                :placeholder="'Search by project name...'" prefix-icon="el-icon-search">
+                                            </el-autocomplete>
+                                            <el-button round icon="el-icon-plus" @click="dialogCreateVisible = true" v-bind:title="'Add'" style="position: absolute;margin-top: 20px; margin-left: 53%;"></el-button>
+                                        </div>
+                                        <div style=" position:relative;left: 0%;top: 2%;right: 0%;bottom: 0; margin: auto; "
+                                            align='center'>
+                                            <el-dialog title="Create a new project" :visible.sync="dialogCreateVisible" v-draggable :modal-append-to-body="false"  >
+                                                <div style="margin-top: 10px;  height: 130px; ">
+                                                    <a @click="toScreener(), dialogCreateVisible=false">
+                                                        <div class="iconfont  icon-plate" style=" font-size: 30px; margin-top: -10px; margin-left: 10px;  font-weight: 600; padding: 10px;padding-top: 20px; padding-bottom: 18px; border: 2px solid; border-radius: 10px;"></div>
+                                                    </a>
+                                                    <a @click="toOptimization(), dialogCreateVisible=false">
+                                                        <div class="iconfont  icon-sousuopaixu" style="font-size: 40px; margin-top: -10px; margin-left: 100px; font-weight: 600; padding: 10px; border: 2px solid; border-radius: 10px;"></div>
+                                                    </a>
+                                                    <a @click="toOpenWebUI(), dialogCreateVisible=false">
+                                                        <div class="iconfont  icon-molecular" style="padding-top: 14px; padding-bottom: 14px; font-size: 36px; margin-top: -10px; margin-left: 190px; font-weight: 600; padding: 12px; border: 2px solid; border-radius: 10px;"></div>
+                                                    </a>
+                                                    <a @click=" toOpenWebUI(),dialogCreateVisible=false">
+                                                        <div class="iconfont  icon-zoom-in" style="font-size: 40px; margin-top: -10px; margin-left: 280px; font-weight: 600; padding: 10px; border: 2px solid; border-radius: 10px;"></div>
+                                                    </a>
+                                                    <a @click="toCC(), dialogCreateVisible=false">
+                                                        <div class="iconfont  icon-list" style="font-size: 40px; margin-top: -10px; margin-left: 370px; font-weight: 600; padding: 10px; border: 2px solid; border-radius: 10px;"></div>
+                                                    </a>
+                                                    <a @click="toCommon(), dialogCreateVisible=false">
+                                                        <div class="iconfont  icon-pcm" style="font-size: 40px; margin-top: -10px; margin-left: 460px; font-weight: 600; padding: 10px; border: 2px solid; border-radius: 10px;"></div>
                                                     </a>
                                                 </div>
-                                                <div class="h2">
-                                                    {{ functionsList[0].title }}
-                                                </div>
-                                                <div class="content">
-                                                    <p>{{ functionsList[0].description }}</p>
-                                                    <a href="#" @click="dialogOptimizationDetail = true">{{ functionsList[0].btn }}</a>
-                                                </div>
+                                            </el-dialog>
+                                        
+                                            <div
+                                                :style="{ height: fixHeight * 0.62 + 'px', marginTop:-10 + 'px', marginLeft: '3%', marginRight: '3%', backgroundColor: projectTableColor, borderRadius: '15px' }">
+                                                <el-table ref="singleTable"
+                                                    :data="filterTableData.slice((currentPage - 1) * pagesize, currentPage * pagesize)"
+                                                    highlight-current-row @current-change="handleCurrentChange">
+                                                    <template slot="empty">
+                                                        <span>{{ tableEmptySpan }}</span>
+                                                    </template>
+                                                    <el-table-column
+                                                        :width="fixWidth * 0.02 + 'px'">
+                                                    </el-table-column>
+                                                    <el-table-column property="id" :label="projectTableTitle[0]"
+                                                        :width="fixWidth * 0.08 + 'px'">
+                                                    </el-table-column>
+                                                    <el-table-column property="order_name" :label="projectTableTitle[1]"
+                                                        :width="fixWidth * 0.2 + 'px'"></el-table-column>
+                                                    <el-table-column property="create_time" :label="projectTableTitle[2]"
+                                                        :width="fixWidth * 0.2 + 'px'"></el-table-column>
+                                                    <el-table-column property="type" :label="projectTableTitle[3]"
+                                                        :width="fixWidth * 0.15 + 'px'"></el-table-column>
+                                                    <el-table-column property="name" :label="projectTableTitle[4]"
+                                                        :width="fixWidth * 0.12 + 'px'"></el-table-column>
+                                                    <el-table-column :label="projectTableTitle[5]">
+                                                        <template slot-scope="scope">
+                                                            <a @click="loadProject(scope.row), changeColor()">
+                                                                <i class="el-icon-document"></i>
+                                                            </a>
+                                                        </template>
+                                                    </el-table-column>
+                                                </el-table>
                                             </div>
-                                            <!--Scale-up-->
-                                            <div class="card">
-                                                <div class="img">
-                                                    <a  @click="toOpenWebUI('scale-up')" >
-                                                        <el-image src="./img/img/scale-up.png" ></el-image>
-                                                    </a>
-                                                </div>
-                                                <div class="h2">
-                                                    {{ functionsList[2].title }}
-                                                </div>
-                                                <div class="content">
-                                                    <p>{{ functionsList[2].description }}</p>
-                                                    <a href="#" @click="dialogOptimizationDetail = true">{{
-                                                        functionsList[2].btn }}</a>
-                                                </div>
-                                            </div>
-                                            <!--Purification-->
-                                            <div class="card">
-                                                <div class="img">
-                                                    <a @click="toOpenWebUI('purification')">
-                                                        <el-image src="./img/img/purification.png"></el-image>
-                                                    </a>
-                                                </div>
-                                                <div class="h2">
-                                                    {{ functionsList[5].title }}
-                                                </div>
-                                                <div class="content">
-                                                    <p>{{ functionsList[5].description }}</p>
-                                                    <a href="#">{{ functionsList[5].btn }}</a>
+                                            <div slot="footer" class="dialog-footer"
+                                                :style="{ float: 'right', marginRight: ratioWidth * 0.028 + 'px', marginTop: 20 + 'px' }">
+                                                <div>
+                                                    <el-pagination class="custom-pagination" style="float:center;" layout="prev, pager, next"
+                                                        :page-count="handleCount()" :background="true" @current-change="current_change">
+                                                    </el-pagination>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
+                                </el-tab-pane>
+
+                                <el-tab-pane name="fifth">
+                                    <iframe id="screener-page" ref="screener-dom" frameborder="0" scrolling="no"
+                                    :style="{ width: moduleWidth + 300 + 'px', height: moduleHeight + 300 + 'px', marginLeft: -13 + '%', }"
+                                        src="/#/screener">
+                                    </iframe>
+                                </el-tab-pane>
+                            </el-tabs>
+
+                            
 
                             <div>
                                 <!-- optimization detail -->
@@ -379,88 +487,9 @@
                                 </el-dialog>
                             </div>
 
-                            <div id="project"
-                                :style="{ position: 'relative', backgroundColor: contentColor, marginTop: 20 + 'px', height: fixHeight * 0.955 + 'px', }">
-                                <div style="margin-left: 3%; position: relative;">
-                                    <el-autocomplete v-model="value_" :fetch-suggestions="querySearch" ref="autoRef" @focus="searchFocus"
-                                        style="margin-top: 20px; margin-bottom: 6px;width:40%;border-radius: 20px;" 
-                                        :placeholder="'Search by project name...'" prefix-icon="el-icon-search">
-                                    </el-autocomplete>
-                                    <el-button round icon="el-icon-plus" @click="dialogCreateVisible = true" v-bind:title="'Add'" style="position: absolute;margin-top: 20px; margin-left: 53%;"></el-button>
-                                </div>
-                                <div style=" position:relative;left: 0%;top: 2%;right: 0%;bottom: 0; margin: auto; "
-                                    align='center'>
-                                    <el-dialog title="Create a new project" :visible.sync="dialogCreateVisible" v-draggable :modal-append-to-body="false"  >
-                                        <div style="margin-top: 10px;  height: 130px; ">
-                                            <a @click="toScreener(), dialogCreateVisible=false">
-                                                <div class="iconfont  icon-plate" style=" font-size: 30px; margin-top: -10px; margin-left: 10px;  font-weight: 600; padding: 10px;padding-top: 20px; padding-bottom: 18px; border: 2px solid; border-radius: 10px;"></div>
-                                            </a>
-                                            <a @click="toOptimization(), dialogCreateVisible=false">
-                                                <div class="iconfont  icon-sousuopaixu" style="font-size: 40px; margin-top: -10px; margin-left: 100px; font-weight: 600; padding: 10px; border: 2px solid; border-radius: 10px;"></div>
-                                            </a>
-                                            <a @click="toOpenWebUI(), dialogCreateVisible=false">
-                                                <div class="iconfont  icon-molecular" style="padding-top: 14px; padding-bottom: 14px; font-size: 36px; margin-top: -10px; margin-left: 190px; font-weight: 600; padding: 12px; border: 2px solid; border-radius: 10px;"></div>
-                                            </a>
-                                            <a @click=" toOpenWebUI(),dialogCreateVisible=false">
-                                                <div class="iconfont  icon-zoom-in" style="font-size: 40px; margin-top: -10px; margin-left: 280px; font-weight: 600; padding: 10px; border: 2px solid; border-radius: 10px;"></div>
-                                            </a>
-                                            <a @click="toCC(), dialogCreateVisible=false">
-                                                <div class="iconfont  icon-list" style="font-size: 40px; margin-top: -10px; margin-left: 370px; font-weight: 600; padding: 10px; border: 2px solid; border-radius: 10px;"></div>
-                                            </a>
-                                            <a @click="toCommon(), dialogCreateVisible=false">
-                                                <div class="iconfont  icon-pcm" style="font-size: 40px; margin-top: -10px; margin-left: 460px; font-weight: 600; padding: 10px; border: 2px solid; border-radius: 10px;"></div>
-                                            </a>
-                                        </div>
-                                    </el-dialog>
-                                  
-                                    <div
-                                        :style="{ height: fixHeight * 0.62 + 'px', marginTop:-10 + 'px', marginLeft: '3%', marginRight: '3%', backgroundColor: projectTableColor, borderRadius: '15px' }">
-                                        <el-table ref="singleTable"
-                                            :data="filterTableData.slice((currentPage - 1) * pagesize, currentPage * pagesize)"
-                                            highlight-current-row @current-change="handleCurrentChange">
-                                            <template slot="empty">
-                                                <span>{{ tableEmptySpan }}</span>
-                                            </template>
-                                            <el-table-column
-                                                :width="fixWidth * 0.02 + 'px'">
-                                            </el-table-column>
-                                            <el-table-column property="id" :label="projectTableTitle[0]"
-                                                :width="fixWidth * 0.08 + 'px'">
-                                            </el-table-column>
-                                            <el-table-column property="order_name" :label="projectTableTitle[1]"
-                                                :width="fixWidth * 0.2 + 'px'"></el-table-column>
-                                            <el-table-column property="create_time" :label="projectTableTitle[2]"
-                                                :width="fixWidth * 0.2 + 'px'"></el-table-column>
-                                            <el-table-column property="type" :label="projectTableTitle[3]"
-                                                :width="fixWidth * 0.15 + 'px'"></el-table-column>
-                                            <el-table-column property="name" :label="projectTableTitle[4]"
-                                                :width="fixWidth * 0.12 + 'px'"></el-table-column>
-                                            <el-table-column :label="projectTableTitle[5]">
-                                                <template slot-scope="scope">
-                                                    <a @click="loadProject(scope.row), changeColor()">
-                                                        <i class="el-icon-document"></i>
-                                                    </a>
-                                                </template>
-                                            </el-table-column>
-                                        </el-table>
-                                    </div>
-                                    <div slot="footer" class="dialog-footer"
-                                        :style="{ float: 'right', marginRight: ratioWidth * 0.028 + 'px', marginTop: 20 + 'px' }">
-                                        <div>
-                                            <el-pagination class="custom-pagination" style="float:center;" layout="prev, pager, next"
-                                                :page-count="handleCount()" :background="true" @current-change="current_change">
-                                            </el-pagination>
-                                        </div>
-                                        <!-- <div style="margin-right: -75%; margin-top:2%"> -->
-                                            <!-- <el-button round>Cancel</el-button> -->
-                                            <!-- <el-button round type="primary" @click="loadProject(), changeColor()">&nbsp;{{
-                                                loadProjBtn }}&nbsp;</el-button>
-                                        </div> -->
-                                    </div>
-                                </div>
-                            </div>
+                            
 
-                            <div id="center-control"
+                            <!-- <div id="center-control"
                                 :style="{ position: 'absolute', height: fixHeight * 0.955 + 'px', marginTop: 20 + 'px', overflow: 'hidden' }"
                                 align='center'>
                                 <iframe id="frames-cc" ref="cc-dom" frameborder="0" scrolling="no"
@@ -534,24 +563,17 @@
                                 :style="{ width: moduleWidth + 300 + 'px', height: 100 + '%', marginLeft: 0 + '%', marginTop: '-18px', marginRight: 10 + '%', visibility: '' }"
                                     src="./3rdPartAI">
                                 </iframe>
-                            </div>
+                            </div> -->
                         </div>
 
-                        <div id="layout"
+                        <!-- <div id="layout"
                             :style="{ position: 'absolute', backgroundColor: contentColor, height: fixHeight * 1 + 'px', marginTop: 20 + 'px', overflow: 'hidden' }"
                             align='center'>
                             <iframe class="scale" id="frames-layout" ref="ref-layout" frameborder="0" scrolling="no"
                                 :style="{ width: 100 + 'vw', height: 100 + '%', visibility: '', }" src="./layout">
                             </iframe>
                         </div>
-                        <!-- <div id="webcam"
-                            :style="{ position: 'absolute', height: fixHeight * 0.955 + 'px', marginTop: 14 + 'px', overflow: 'hidden' }"
-                            align='center'>
-                            <iframe class="scale-cam" id="frames-webcam" frameborder="0" scrolling="no"
-                                :style="{ width: moduleWidth + 300 + 'px', height: 100 + '%', visibility: '', }"
-                                src="./static/play1.html">
-                            </iframe>
-                        </div> -->
+
                         <div id="webcam"
                             :style="{ position: 'absolute', height: fixHeight * 0.955 + 'px', marginTop: 14 + 'px', overflow: 'hidden' }"
                             align='center'>
@@ -576,13 +598,13 @@
                                 :style="{ width: moduleWidth + 300 + 'px', marginLeft: -13 + '%', height: 100 + '%', visibility: '', }"
                                 src="./module">
                             </iframe>
-                        </div>
+                        </div> -->
                     </div>
                 </el-col>
                 <div>
                     <div id="Drag" class="main">
                         <div @mousedown="mousedown($event)" class=" by-menu" v-bind:title="'Toolkit'">
-                            <div class="iconfont icon-fenzi menu-icon"></div>
+                            <div class="iconfont icon-fenzi menu-icon" style="margin-top:25px"></div>
                         </div>
                         <div class="menu" >
                             <input type="checkbox" href="#" class="menu-open" name="menu-open" id="menu-open">
@@ -601,9 +623,9 @@
                 </div>
                 <el-dialog title="Baichuan" :visible.sync="dialogBaichuanVisible" v-draggable style="margin-top: -100px;"
                     :custom-class="'baichuan'">
-                    <iframe src="http://10.99.150.211:8501/" style="width: 1000px; height: 700px;">
+                    <!-- <iframe src="http://10.99.150.211:8501/" style="width: 1000px; height: 700px;">
 
-                    </iframe>
+                    </iframe> -->
                 </el-dialog>
             </el-row>
         </div>
@@ -612,10 +634,13 @@
 
 <script>
 import draggable from '../../utils/draggable';
-import * as XLSX from 'xlsx';
+// import * as XLSX from 'xlsx';
 import axios from 'axios';
-import conf from '../../../vue.config'
+import conf from '../../config'
 import DevicePixelRatio from '../../utils/devicePixelRatio'
+import Vue from 'vue';
+import openwebui from '../3rdPartAI/3rdPartAI.vue';
+Vue.component('openwebui', openwebui);
 export default {
     directives: {
         draggable,
@@ -636,6 +661,7 @@ export default {
             fixHeight: window.screen.height,
             menuHeight: window.screen.height * 0.955,
             moduleWidth: window.screen.width * 0.83,
+            moduleHeight: window.screen.width * 0.83,
             footerHeight: window.screen.width * 0.1,
             dialogSettingsVisible: false,
             dialogHelpVisible: false,
@@ -650,8 +676,10 @@ export default {
                 name: localStorage.getItem('username') ? localStorage.getItem('username') : 'Engineer',
                 group: '',
             },
-            userAvatar: "./img/img/GitHub.png",
-            avatarSrc: "./img/img/GitHub.png",
+            userAvatar: require('@/assets/img/img/GitHub.png'),
+            // userAvatar: "./img/img/GitHub.png",
+            avatarSrc: require('@/assets/img/img/GitHub.png'),
+            // avatarSrc: "./img/img/GitHub.png",
             routerJumper: '',
             currentDom: '',
             aiDom: this.$refs["optimization-dom"],
@@ -665,14 +693,14 @@ export default {
             total: 0,
             pagesize: Math.ceil(window.screen.height / 90),
             currentPage: 1,
-            src1: './img/img/111.png',
-            src2: './img/img/222.png',
-            src3: './img/img/333.png',
-            src4: './img/img/444.png',
-            src5: './img/img/555.png',
-            src6: './img/img/666.png',
-            src7: './img/img/777.png',
-            src8: './img/img/111.png',
+            // src1: './img/img/111.png',
+            // src2: './img/img/222.png',
+            // src3: './img/img/333.png',
+            // src4: './img/img/444.png',
+            // src5: './img/img/555.png',
+            // src6: './img/img/666.png',
+            // src7: './img/img/777.png',
+            // src8: './img/img/111.png',
             srcBLK: './img/img/blk.png',
             sideBarColor: '#ffffff',
             sideBarFontColor: '',
@@ -733,6 +761,11 @@ export default {
         }
     },
     methods: {
+        
+        refreshPage() {
+        location.reload();
+        },
+  
         mousedown(event) {
             this.disX = event.clientX - this.DragEl.offsetLeft;
             this.disY = event.clientY - this.DragEl.offsetTop;
@@ -783,16 +816,30 @@ export default {
             let root = document.querySelector(":root");
             if (document.getElementById("arrow").className == "el-icon-arrow-down") {
                 document.getElementById("arrow").className = "el-icon-arrow-up"
-                document.getElementById("item").style.visibility = ""
-                document.getElementById("item").style.position = "relative"
-                root.style.setProperty("--cover-top", "0px")
+                root.style.setProperty("--cover-top", -375 + (1920 - this.fixWidth) * 0.02 + 'px')
+                // root.style.setProperty("--cover-top", -260 + (1920 - this.fixWidth) * 0.02 + 'px')
             }
             else {
                 document.getElementById("arrow").className = "el-icon-arrow-down"
-                root.style.setProperty("--cover-top", -390 + (1920 - this.fixWidth) * 0.02 + 'px')
-                // root.style.setProperty("--cover-top", -260 + (1920 - this.fixWidth) * 0.02 + 'px')
+                document.getElementById("item").style.visibility = ""
+                document.getElementById("item").style.position = "relative"
+                root.style.setProperty("--cover-top", "30px")
             }
         },
+        // funClick() {
+        //     let root = document.querySelector(":root");
+        //     if (document.getElementById("arrow").className == "el-icon-arrow-down") {
+        //         document.getElementById("arrow").className = "el-icon-arrow-up"
+        //         document.getElementById("item").style.visibility = ""
+        //         document.getElementById("item").style.position = "relative"
+        //         root.style.setProperty("--cover-top", "0px")
+        //     }
+        //     else {
+        //         document.getElementById("arrow").className = "el-icon-arrow-down"
+        //         root.style.setProperty("--cover-top", -390 + (1920 - this.fixWidth) * 0.02 + 'px')
+        //         // root.style.setProperty("--cover-top", -260 + (1920 - this.fixWidth) * 0.02 + 'px')
+        //     }
+        // },
 
         sendColorSig(_dom) {
             let _window = ''
@@ -1027,28 +1074,31 @@ export default {
         },
 
         homeClick() {
-            this.hideDiv()
-            document.getElementById("home").style.display = ""
+            this.refreshPage()
+            // this.activeName = "first"
+            // this.hideDiv()
+            // document.getElementById("home").style.display = ""
         },
+        // homeClick() {
+        //     this.hideDiv()
+        //     document.getElementById("home").style.display = ""
+        // },
 
         projectClick() {
+            this.activeName = "fourth"
             this.loadingProject = true
             console.log('***', localStorage.getItem('username'))
             // open ⬇
             axios.post(this.url + "/main-page/get-projects").then((res) => {
                 if ('NO DATA' != res['data']['msg']) {
                     this.tableData = res['data'];
-                    console.log(this.tableData)
                     this.total = res['data'].length;
-                    console.log(this.total)
                 }
                 else {
                     this.total = 0
                 }
-                this.hideDiv()
-                this.putBottom()
-                document.getElementById("project").style.display = ""
-                document.getElementById("project").style.zIndex = 991
+                this.loadingProject = false
+            }).catch((err) => {
                 this.loadingProject = false
             });
 
@@ -1076,8 +1126,53 @@ export default {
             //     document.getElementById("project").style.zIndex = 991
             //     this.loadingProject = false
             // })
-
         },
+        // projectClick() {
+        //     this.loadingProject = true
+        //     console.log('***', localStorage.getItem('username'))
+        //     // open ⬇
+        //     axios.post(this.url + "/main-page/get-projects").then((res) => {
+        //         if ('NO DATA' != res['data']['msg']) {
+        //             this.tableData = res['data'];
+        //             console.log(this.tableData)
+        //             this.total = res['data'].length;
+        //             console.log(this.total)
+        //         }
+        //         else {
+        //             this.total = 0
+        //         }
+        //         this.hideDiv()
+        //         this.putBottom()
+        //         document.getElementById("project").style.display = ""
+        //         document.getElementById("project").style.zIndex = 991
+        //         this.loadingProject = false
+        //     });
+
+        //     // simulation data
+        //     // this.tableData = [{"id": 1,"order_name": "test","create_time": "2023-10-10","type": "opt","name": "test",}];
+        //     // console.log(this.tableData)
+        //     // this.total = [].length;
+        //     // console.log(this.total)
+        //     // this.hideDiv()
+        //     // this.putBottom()
+        //     // document.getElementById("project").style.display = ""
+        //     // document.getElementById("project").style.zIndex = 991
+        //     // this.loadingProject = false
+
+        //     // General project data
+        //     // axios.post(this.url + "/main-page/get-projects", {"owner": localStorage.getItem('username')})
+        //     // .then((res) => {
+        //     //     console.log(res)
+        //     //     this.tableData = res['data']['data'];
+        //     //     this.filterTableData = res['data']['data'];
+        //     //     this.total = this.tableData.length;
+        //     //     this.hideDiv()
+        //     //     this.putBottom()
+        //     //     document.getElementById("project").style.display = ""
+        //     //     document.getElementById("project").style.zIndex = 991
+        //     //     this.loadingProject = false
+        //     // })
+        // },
 
         handleCount() {
             return Math.ceil(this.total / this.pagesize)
@@ -1109,32 +1204,40 @@ export default {
         },
 
         toOptimization() {
-            this.routerJumper = './ai'
-            this.hideDiv()
-            this.putBottom()
-            document.getElementById("frames").style.visibility = ""
-            document.getElementById("optimization").style.zIndex = 993
-            this.changeColor()
+            this.activeName = "third"
+            this.routerJumper = '/#/ai'
+            // this.hideDiv()
+            // this.putBottom()
+            // document.getElementById("frames").style.visibility = ""
+            // document.getElementById("optimization").style.zIndex = 993
+            // this.changeColor()
         },
 
         toScreener() {
-            this.hideDiv()
-            this.putBottom()
-            document.getElementById("screener-page").style.visibility = ""
-            document.getElementById("screener").style.zIndex = 993
-            this.changeColor()
+            this.activeName = "fifth"
+            // this.routerJumper = '/#/screener'
+            // this.hideDiv()
+            // this.putBottom()
+            // document.getElementById("screener-page").style.visibility = ""
+            // document.getElementById("screener").style.zIndex = 993
+            // this.changeColor()
         },
 
         toOpenWebUI(_type) {
-            if (this.loadingComplete == 1) {
-                this.hideDiv()
-                this.putBottom()
-                document.getElementById("3rdPartUI-page").style.visibility = ""
-                document.getElementById("3rdPartUI").style.zIndex = 993
-                this.changeColor()
-                this.sendTypeSig("3rdPartUI-dom", _type)
-            }
+            this.activeName = "second"
+            this.routerJumper = '/#/3rdPartAI'
+            this.sendTypeSig("3rdPartUI-dom", _type)
         },
+        // toOpenWebUI(_type) {
+        //     this.hideDiv()
+        //     this.putBottom()
+        //     document.getElementById("3rdPartUI-page").style.visibility = ""
+        //     document.getElementById("3rdPartUI").style.zIndex = 994
+        //     this.changeColor()
+        //     this.sendTypeSig("3rdPartUI-dom", _type)
+        //     if (this.loadingComplete == 1) {
+        //     }
+        // },
 
         toReactionSystem() {
             this.hideDiv()
@@ -1434,6 +1537,7 @@ export default {
         },
     },
     mounted() {
+        this.$refs.tabs.$children[0].$el.style.display = "none";
         window.addEventListener('message', event => {
             if(event.data.signal == "optimization"){
                 this.toOptimization()
@@ -1646,8 +1750,8 @@ export default {
     --cover-bg-clr: #ffffff;
     --cover-border-top: #dddddd;
     --header-tool-cover-height: 0;
-    --side-check-dup-left: 0;
-    --side-check-left: 0;
+    --side-check-dup-left: 250%;
+    --side-check-left: 320%;
     --block-height: 0;
 
     --top-val: 10vh;
@@ -2235,6 +2339,7 @@ body>.el-container {
 }
 
 .menu-item:hover {
+    margin-left: 30%;
     background: #EEEEEE;
     color: #3290B1;
 }

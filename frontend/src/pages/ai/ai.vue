@@ -4,7 +4,10 @@
       <el-col :span="5">
         <div class="grid-content">
           <a @click="chooseStep(active, 'left')" v-if="isShowPrev(active)">
-              <div class="prev el-icon-arrow-left"></div>
+              <div class="prev">
+                <div class=" el-icon-arrow-left">
+                </div>
+              </div>
             </a>
         </div>
       </el-col>
@@ -40,7 +43,7 @@
                         >
                       </el-input>
                       <el-button
-                        style="position :absolute;"
+                        style="position :absolute; margin-left: 90%"
                         class="rounded-right-button"
                         @click="dialogTableVisible = true;"
                       >
@@ -82,9 +85,10 @@
                         style="visibility: hidden"
                         class="equation-img"
                         >
-                        <canvas id="equation_src"></canvas>
-                        <el-image :src="img_arrow"></el-image>
-                        <canvas id="equation_dst"></canvas>
+                        <el-image :src="imgArr[0]"></el-image>
+                        <!-- <canvas id="equation_src"></canvas> -->
+                        <!-- <el-image :src="img_arrow"></el-image> -->
+                        <!-- <canvas id="equation_dst"></canvas> -->
                       </div>
                     </div>
 
@@ -797,28 +801,41 @@
                     </span>
                   </el-dialog>
                 </div>
+                <div id="button1" style="position:relative; height: 560px;">
+                    <iframe
+                      ref="iframedom"
+                      src="/#/graph-canvas"
+                      id="frames"
+                      frameborder="1"
+                      class="occupy"
+                      style="position:absolute;"
+                      >
+                    </iframe>
 
-                <div id="button1" :style="{height: isOccupying() + 'px'}">
-                  <iframe
-                    ref="iframedom"
-                    src=""
-                    id="frames"
-                    frameborder="0"
-                    style="visibility: hidden;"
-                    class="occupy"
-                    >
-                  </iframe>
+                  <div id="cover" style="position:absolute; height: 560px; width: 100%; background-color: #f4f5f6; "></div>
                 </div>
-                <el-tab-pane label="Step 7" name="seventh">
-                    <div style="position:relative; margin-left: 89%; ">
-                      <a @click="confirmAllPara">
-                        <div class="gpt" style="font-size: medium ; font-weight: 700;">
-                          {{checkBtn}}
-                        </div>
-                      </a>
-                    </div>
-                </el-tab-pane>
-              </div>
+
+                <!-- <div id="button1" :style="{height: isOccupying() + 'px'}">
+                  <iframe
+                  ref="iframedom"
+                  src=""
+                  id="frames"
+                  frameborder="0"
+                  style="visibility: hidden;"
+                  class="occupy"
+                  >
+                </iframe>
+              </div> -->
+            </div>
+            <el-tab-pane label="Step 7" name="seventh">
+              <div style="position:relative; margin-left: 89%; ">
+                    <a @click="confirmAllPara">
+                      <div class="gpt" style="font-size: medium ; font-weight: 700;">
+                        {{checkBtn}}
+                      </div>
+                    </a>
+                  </div>
+              </el-tab-pane>
 
               <el-tab-pane label="Step 8" name="eighth">
                 <iframe
@@ -838,7 +855,9 @@
       <el-col :span="5">
         <div class="grid-content">
           <a @click="chooseStep(active, 'right')" v-if="isShowRight(active)">
-            <div class="next el-icon-arrow-right"></div>
+            <div class="next">
+              <div class="el-icon-arrow-right"></div>
+            </div>
           </a>
         </div>
       </el-col>
@@ -848,7 +867,7 @@
 
 <script>
 import axios from "axios";
-import conf from "../../../vue.config";
+import conf from "../../config";
 import lodash from "lodash";
 import DevicePixelRatio from '../../utils/devicePixelRatio'
 import draggable from '../../utils/draggable';
@@ -1454,7 +1473,7 @@ export default {
       this.ketcher.getSmiles().then((res) => {
         this.inputsmiles = res;
         if (!this.emptyAlert(this.inputsmiles)) {
-          this.handleJSRDKit()
+          // this.handleJSRDKit()
           this.smiles2backend(this.inputsmiles);
         }
       });
@@ -1464,7 +1483,7 @@ export default {
       this.fullscreenLoading = true;
       this.imgArr = [];
       if (!this.emptyAlert(this.inputsmiles)) {
-        this.handleJSRDKit()
+        // this.handleJSRDKit()
         this.smiles2backend(this.inputsmiles);
       }
     },
@@ -1650,10 +1669,10 @@ export default {
       //     this.active = 1;
       //     document.getElementById("frames").style.height = "0";
       //   });
-      this.textarea1Synthesis ="";
+      this.textarea1Synthesis ="To a solution of alcohol (0.25 mmol) in CH3CN (0.25 mL) in a 13 mm culture tube was added sequentially a solution of (1) CuOTf /bpy(0.25 mL,0.05M), (2) TEMPO (0.25 mL, 0.05M), and (3) NMI (0.25 mL,0.10M).";
         // "To a solution of alcohol (0.25 mmol) in CH3CN (0.25 mL) in a 13 mm culture tube was added sequentially a solution of (1) CuOTf /bpy(0.25 mL,0.05M), (2) TEMPO (0.25 mL, 0.05M), and (3) NMI (0.25 mL,0.10M).";
-      this.textarea1Workup = "";//"Add 0.75 mL HEDP";
-      this.variableAndRange = "";//"I want to optimize four variables: 1. Reaction time: 60-80 minutes, 2. Base volume: 0.125-0.25 ml, 3. Cu catalyst: CuBr2, CuBr, Cu(OTf), Cu(OTf)2 4. Base type: NMI, DBU."
+      this.textarea1Workup = "Add 0.75 mL HEDP";//"Add 0.75 mL HEDP";
+      this.variableAndRange = "I want to optimize four variables: 1. Reaction time: 60-80 minutes, 2. Base volume: 0.125-0.25 ml, 3. Cu catalyst: CuBr2, CuBr, Cu(OTf), Cu(OTf)2 4. Base type: NMI, DBU.";//"I want to optimize four variables: 1. Reaction time: 60-80 minutes, 2. Base volume: 0.125-0.25 ml, 3. Cu catalyst: CuBr2, CuBr, Cu(OTf), Cu(OTf)2 4. Base type: NMI, DBU."
       this.fullscreenLoading = false;
       this.activeName = "second";
       this.active = 1;
@@ -1993,6 +2012,7 @@ export default {
       document.getElementById("frames").style.visibility = "hidden";
       this.activeName = "sixth";
       this.active = 5;
+      document.getElementById("cover").style.visibility = "";
     },
     async doSomethingAsync() {
       return new Promise(function (resolve, reject) {
@@ -2032,7 +2052,9 @@ export default {
                 objective: this.valueObjective,
                 analysis: this.dataAnalysis,
                 flowChat: this.getFlowchartData,
-                name: this.project_form.project_name
+                name: this.project_form.project_name,
+                type: "Optimization",
+                owner: localStorage.getItem('username')
               }
             }).then((res)=>{
               // get created ID
@@ -2086,8 +2108,11 @@ export default {
       this.active = 6;
       this.activeName = "seventh";
       document.getElementById("frames").style.height = "540px";
-      document.getElementById("frames").style.visibility = "";
+      // document.getElementById("frames").style.visibility = "";
       document.getElementById("button1").style.visibility = "";
+      document.getElementById("button1").style.height = 0;
+      document.getElementById("cover").style.height = 0;
+      document.getElementById("cover").style.visibility = "hidden";
       // })
 
       // create reaction space
@@ -2466,8 +2491,8 @@ export default {
       false
     );
 
-    document.getElementById("frames").src = "./graph-canvas";
-    document.getElementById("display").src = "./display";
+    document.getElementById("frames").src = "/#/graph-canvas";
+    document.getElementById("display").src = "/#/display";
     this.hideTabs();
   },
 };
@@ -2625,7 +2650,7 @@ export default {
 
 .occupy{
   width: 99%; 
-  height: 460px;  
+  height: 540px;  
   border-radius: 15px; 
   border: 2px solid #80bfff
 }
