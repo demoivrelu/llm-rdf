@@ -114,7 +114,8 @@
                     </div>
                     <iframe id="kinetics-page" ref="kinetics-dom" frameborder="0" scrolling="no"
                         :style="{   width: fixWidth + 'px', height: fixHeight *0.95  + 'px', marginLeft: 0 + '%',marginTop: '-10px', marginRight: 10 + '%', visibility: '' }"
-                        src="http://10.97.22.36:8080/">
+                        src="">
+                        <!-- src="http://10.97.22.36:8080/"> -->
                     
                     </iframe>
                 </el-tab-pane>
