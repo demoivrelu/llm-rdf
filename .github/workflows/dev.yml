@@ -18,4 +18,4 @@ jobs:
     - name: install modules
       run: cd frontend && npm install -g npm@6.14.14 && npm install
     - name: build
-      run: npm install @vue/cli && npm run build
+      run: npm install -g @vue/cli && npm run build
