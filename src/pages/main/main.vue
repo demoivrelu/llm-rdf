@@ -818,11 +818,11 @@ export default {
                 document.getElementById("arrow").className = "el-icon-arrow-up"
                 document.getElementById("item").style.visibility = ""
                 document.getElementById("item").style.position = "relative"
-                root.style.setProperty("--cover-top", "30px")
+                root.style.setProperty("--cover-top", "0px")
             }
             else {
                 document.getElementById("arrow").className = "el-icon-arrow-down"
-                root.style.setProperty("--cover-top", -375 + (1920 - this.fixWidth) * 0.02 + 'px')
+                root.style.setProperty("--cover-top", -390 + (1920 - this.fixWidth) * 0.02 + 'px')
                 // root.style.setProperty("--cover-top", -260 + (1920 - this.fixWidth) * 0.02 + 'px')
             }
         },
