@@ -375,14 +375,14 @@
                                     <!-- <openwebui/> -->
                                     <iframe id="3rdPartUI-page" ref="3rdPartUI-dom" frameborder="1" scrolling="no"
                                         :style="{ width: moduleWidth + 300 + 'px', height: moduleHeight + 300 + 'px', marginRight: 10 + '%', marginLeft: 0 + '%', marginTop: '-18px', marginRight: 10 + '%',  }"
-                                        src="./3rdPartAI">
+                                        src="/#/3rdPartAI">
                                     </iframe>
                                 </el-tab-pane>
 
                                 <el-tab-pane name="third">
                                     <iframe id="frames" ref="optimization-dom" frameborder="0" scrolling="no"
                                         :style="{ width: moduleWidth + 300 + 'px', height: moduleHeight + 300 + 'px', marginLeft: -13 + '%',}"
-                                        src="./ai">
+                                        src="/#/ai">
                                     </iframe>
                                 </el-tab-pane>
 
@@ -467,7 +467,7 @@
                                 <el-tab-pane name="fifth">
                                     <iframe id="screener-page" ref="screener-dom" frameborder="0" scrolling="no"
                                     :style="{ width: moduleWidth + 300 + 'px', height: moduleHeight + 300 + 'px', marginLeft: -13 + '%', }"
-                                        src="./screener">
+                                        src="/#/screener">
                                     </iframe>
                                 </el-tab-pane>
                             </el-tabs>
@@ -1215,7 +1215,7 @@ export default {
 
         toScreener() {
             this.activeName = "fifth"
-            // this.routerJumper = '/#/screener'
+            this.routerJumper = '/#/screener'
             // this.hideDiv()
             // this.putBottom()
             // document.getElementById("screener-page").style.visibility = ""
@@ -1225,6 +1225,7 @@ export default {
 
         toOpenWebUI(_type) {
             this.activeName = "second"
+            this.routerJumper = '/#/3rdPartAI'
             this.sendTypeSig("3rdPartUI-dom", _type)
         },
         // toOpenWebUI(_type) {
