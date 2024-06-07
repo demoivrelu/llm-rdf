@@ -11,14 +11,14 @@ const routes = [
     { path: '/login', component: login },
     { path: '/my', component: My },
     { path: '/main', component: () => import('../pages/main/main.vue') },
-    //{ path: '/3rdPartAI', name: '3rdPartAI', component: ThirdPartAI, },
-    // { path: '/ai', name: 'ai', component: ai, },
-    //{ path: '/screener', name: 'screener', component: () => import('../pages/screener/screener.vue') },
-    //{
-     // path: '/graph-canvas',
-     // name: 'graph-canvas',
-    //  component: () => import('../pages/graph/graphCanvas.vue'),
-   // },
+    { path: '/3rdPartAI', name: '3rdPartAI', component: ThirdPartAI, },
+    { path: '/ai', name: 'ai', component: ai, },
+    { path: '/screener', name: 'screener', component: () => import('../pages/screener/screener.vue') },
+    {
+     path: '/graph-canvas',
+     name: 'graph-canvas',
+     component: () => import('../pages/graph/graphCanvas.vue'),
+   },
   ]
   
 export default new Router({ routes })
