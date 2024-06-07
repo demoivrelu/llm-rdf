@@ -24,3 +24,5 @@ jobs:
       with:
         branch: gh-pages
         folder: frontend/dist
+    - name: cp
+      run: cp frontend/dist dist
