@@ -36,7 +36,7 @@
                 <div style="position:relative; float: right;height: 50px;">
                     <div id="user" :style="{ marginTop: '12%', marginRight: fixWidth * 0.03 + 'px' }">
                         <a>
-                            <el-image :src="userAvatar"></el-image>
+                            <!-- <el-image :src="userAvatar"></el-image> -->
                         </a>
                     </div>
                 </div>
@@ -59,23 +59,23 @@
                 <el-dialog custom-class="help-dialog" :top="'80px'" :title="headerTool[1].name" :visible.sync="dialogHelpVisible" v-draggable>
                     <el-carousel indicator-position="none" :autoplay='false' :width="'800px'" :height="'640px'" >
                         <el-carousel-item>
-                            <el-image :src="require('@/assets/img/help/00-homepage.png')"/>
+                            <!-- <el-image :src="require('@/assets/img/help/00-homepage.png')"/> -->
                             <div class="help-title">Homepage</div>
                         </el-carousel-item>
                         <el-carousel-item>
-                            <el-image :src="require('@/assets/img/help/02-Function.png')"></el-image>
+                            <!-- <el-image :src="require('@/assets/img/help/02-Function.png')"></el-image> -->
                             <div class="help-title">Function</div>
                         </el-carousel-item>
                         <el-carousel-item>
-                            <el-image :src="require('@/assets/img/help/03-Display.png')"></el-image>
+                            <!-- <el-image :src="require('@/assets/img/help/03-Display.png')"></el-image> -->
                             <div class="help-title">Display</div>
                         </el-carousel-item>
                         <el-carousel-item>
-                            <el-image :src="require('@/assets/img/help/04-Projects.png')"></el-image>
+                            <!-- <el-image :src="require('@/assets/img/help/04-Projects.png')"></el-image> -->
                             <div class="help-title">Projects</div>
                         </el-carousel-item>
                         <el-carousel-item>
-                            <el-image :src="require('@/assets/img/help/06-Library.png')"></el-image>
+                            <!-- <el-image :src="require('@/assets/img/help/06-Library.png')"></el-image> -->
                             <div class="help-title">Library</div>
                         </el-carousel-item>
                     </el-carousel>
@@ -93,9 +93,9 @@
                             </el-select>
                         </el-form-item>
                         <el-form-item label="Avatar">
-                            <el-image
+                            <!-- <el-image
                                 :src=avatarSrc
-                                ></el-image>
+                                ></el-image> -->
                                 <a @click="avatarVisible = true">
                                     <i style="font-size: large;" class="el-icon-edit" ></i>
                                 </a>
@@ -111,11 +111,11 @@
                 </el-dialog>
                 <el-dialog  title="Avatar" :visible.sync="avatarVisible" v-draggable>
                     <div>
-                        <a><el-image style="margin:20px" :src="require('@/assets/img/img/GitHub.png')" @click="avatarVisible =false; changeAtatar('./img/img/GitHub.png')"></el-image> </a>
+                        <!-- <a><el-image style="margin:20px" :src="require('@/assets/img/img/GitHub.png')" @click="avatarVisible =false; changeAtatar('./img/img/GitHub.png')"></el-image> </a>
                         <a><el-image style="margin:20px" :src="require('@/assets/img/img/Avatar-111.png')" @click="avatarVisible =false;changeAtatar('./img/img/Avatar-111.png')"></el-image> </a>
                         <a><el-image style="margin:20px" :src="require('@/assets/img/img/Avatar-222.png')" @click="avatarVisible =false;changeAtatar('./img/img/Avatar-222.png')"></el-image> </a>
                         <a><el-image style="margin:20px" :src="require('@/assets/img/img/Avatar-333.png')" @click="avatarVisible =false;changeAtatar('./img/img/Avatar-333.png')"></el-image> </a>
-                        <a><el-image style="margin:20px" :src="require('@/assets/img/img/Avatar-444.png')" @click="avatarVisible =false;changeAtatar('./img/img/Avatar-444.png')"></el-image> </a>
+                        <a><el-image style="margin:20px" :src="require('@/assets/img/img/Avatar-444.png')" @click="avatarVisible =false;changeAtatar('./img/img/Avatar-444.png')"></el-image> </a> -->
                     </div>                  
                 </el-dialog>
             </el-row>
@@ -272,7 +272,7 @@
                                                     <div class="card">
                                                         <div class="img">
                                                             <a @click="toOpenWebUI('literature search')">
-                                                                <el-image :src="require('@/assets/img/img/method search.png')"></el-image>
+                                                                <!-- <el-image :src="require('@/assets/img/img/method search.png')"></el-image> -->
                                                             </a>
                                                         </div>
                                                         <div class="h2">
@@ -287,7 +287,7 @@
                                                     <div class="card">
                                                         <div class="img">
                                                             <a @click="toOpenWebUI('screening')" >
-                                                                <el-image :src="require('@/assets/img/img/screen.png')" ></el-image>
+                                                                <!-- <el-image :src="require('@/assets/img/img/screen.png')" ></el-image> -->
                                                             </a>
                                                         </div>
                                                         <div class="h2">
@@ -303,7 +303,7 @@
                                                     <div class="card">
                                                         <div class="img">
                                                             <a @click="toOpenWebUI('kinetics')">
-                                                                <el-image :src="require('@/assets/img/img/kinetics.png')"></el-image>
+                                                                <!-- <el-image :src="require('@/assets/img/img/kinetics.png')"></el-image> -->
                                                             </a>
                                                         </div>
                                                         <div class="h2">
@@ -323,7 +323,7 @@
                                                     <div class="card">
                                                         <div class="img">
                                                             <a @click="toOpenWebUI('optimization')">
-                                                                <el-image :src="require('@/assets/img/img/optimization.png')"></el-image>
+                                                                <!-- <el-image :src="require('@/assets/img/img/optimization.png')"></el-image> -->
                                                             </a>
                                                         </div>
                                                         <div class="h2">
@@ -338,7 +338,7 @@
                                                     <div class="card">
                                                         <div class="img">
                                                             <a  @click="toOpenWebUI('scale-up')" >
-                                                                <el-image :src="require('@/assets/img/img/scale-up.png')" ></el-image>
+                                                                <!-- <el-image :src="require('@/assets/img/img/scale-up.png')" ></el-image> -->
                                                             </a>
                                                         </div>
                                                         <div class="h2">
@@ -354,7 +354,7 @@
                                                     <div class="card">
                                                         <div class="img">
                                                             <a @click="toOpenWebUI('purification')">
-                                                                <el-image :src="require('@/assets/img/img/purification.png')"></el-image>
+                                                                <!-- <el-image :src="require('@/assets/img/img/purification.png')"></el-image> -->
                                                             </a>
                                                         </div>
                                                         <div class="h2">
@@ -1494,7 +1494,7 @@ export default {
             else if (this.languageVal == 'Cn') {
                 this.setCn()
             }
-            this.sendLanSig(this.languageVal)
+            // this.sendLanSig(this.languageVal)
         },
 
         sendLanSig(_val) {
@@ -1621,7 +1621,7 @@ export default {
             });
 
 
-        this.hideDiv()
+        // this.hideDiv()
 
         document.getElementById("home").style.display = ""
         
