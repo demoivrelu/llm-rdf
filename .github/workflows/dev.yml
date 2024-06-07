@@ -5,7 +5,7 @@ permissions:
 
 jobs:
   run-build:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     steps:
     - name: Setup Node.js
       uses: actions/setup-node@v2
