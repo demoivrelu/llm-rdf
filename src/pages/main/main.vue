@@ -816,14 +816,14 @@ export default {
             let root = document.querySelector(":root");
             if (document.getElementById("arrow").className == "el-icon-arrow-down") {
                 document.getElementById("arrow").className = "el-icon-arrow-up"
-                root.style.setProperty("--cover-top", -375 + (1920 - this.fixWidth) * 0.02 + 'px')
-                // root.style.setProperty("--cover-top", -260 + (1920 - this.fixWidth) * 0.02 + 'px')
-            }
-            else {
-                document.getElementById("arrow").className = "el-icon-arrow-down"
                 document.getElementById("item").style.visibility = ""
                 document.getElementById("item").style.position = "relative"
                 root.style.setProperty("--cover-top", "30px")
+            }
+            else {
+                document.getElementById("arrow").className = "el-icon-arrow-down"
+                root.style.setProperty("--cover-top", -375 + (1920 - this.fixWidth) * 0.02 + 'px')
+                // root.style.setProperty("--cover-top", -260 + (1920 - this.fixWidth) * 0.02 + 'px')
             }
         },
         // funClick() {
