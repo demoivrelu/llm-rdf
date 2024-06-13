@@ -62,7 +62,7 @@
                           <div>
                             <iframe
                               id="idKetcher"
-                              src='/llm-rdf/standalone/index.html'
+                              src='https://demoivrelu.github.io/llm-rdf/standalone/index.html'
                               width="100%"
                               height="580"
                             />
