@@ -122,7 +122,7 @@
 
 <script>
 import axios from 'axios'
-import draggable from 'vuedraggable'
+// import draggable from 'vuedraggable'
 // import {Popover} from 'vant'
 // Vue.use(Popover)
 

@@ -2,9 +2,155 @@
   <div class="root">
     <div id="headPanel" :class="{ hidden: headVisible }">
       <span class="logo" style="font-weight: bold">Instrument Flow Chart</span>
+      <button class="save" style="float: right" @click="saveall">
+        Save Data
+      </button>
+      <i class="space"></i>
+
+      <span>
+        <input type="file" id="file" style="display: none" multiple />
+        <button class="save" style="float: right" @click="loadall">
+          Load Data
+        </button>
+      </span>
+
+      <span>
+        <button class="save" style="float: right" @click="submitDB">
+          Submit DB
+        </button>
+      </span>
+
+      <span>
+        <button
+          class="save"
+          style="float: right"
+          @click="
+            loadFromDB();
+            dialogTableVisible = true;
+          "
+        >
+          Load DB
+        </button>
+        <el-dialog
+          title="Please choose order ID"
+          :visible.sync="dialogTableVisible"
+        >
+          <el-table
+            ref="singleTable"
+            :data="
+              tableData.slice(
+                (currentPage - 1) * pagesize,
+                currentPage * pagesize
+              )
+            "
+            highlight-current-row
+            @current-change="handleCurrentChange"
+          >
+            <el-table-column
+              property="id"
+              label="ID"
+              width="370"
+            ></el-table-column>
+            <el-table-column
+              property="order_name"
+              label="ChartName"
+              width="550"
+            ></el-table-column>
+          </el-table>
+          <span slot="footer" class="dialog-footer">
+            <div>
+              <el-pagination
+                style="float: center"
+                background
+                layout="prev, pager, next"
+                :total="total"
+                @current-change="current_change"
+              >
+              </el-pagination>
+              <div></div>
+              <el-button @click="dialogTableVisible = false">Cancel</el-button>
+              <el-button
+                type="primary"
+                @click="
+                  dialogTableVisible = false;
+                  loadDBJson();
+                "
+                >OK</el-button
+              >
+            </div>
+          </span>
+        </el-dialog>
+      </span>
+
+      <span>
+        <button
+          class="save"
+          style="float: right"
+          @click="dialogResetAllVisible = true"
+        >
+          Init All
+        </button>
+        <el-dialog
+          title="Warning"
+          :visible.sync="dialogResetAllVisible"
+          width="30%"
+        >
+          <span>Confirm all instruments and HOLE SYSTEM SAFETY!</span>
+          <span slot="footer" class="dialog-footer">
+            <el-button @click="dialogResetAllVisible = false">Cancel</el-button>
+            <el-button
+              type="primary"
+              @click="
+                dialogResetAllVisible = false;
+                resetOrder();
+              "
+              >OK</el-button
+            >
+          </span>
+        </el-dialog>
+      </span>
+
+      <span>
+        <button
+          id="emergencybtn"
+          style="float: right"
+          class="save"
+          size="mini"
+          @click="emergency()"
+        >
+          emergency
+        </button>
+      </span>
+      <span>
+        <button
+          id="startbtn"
+          style="float: right"
+          :class="0 == display ? 'save' : 'notsave'"
+          size="mini"
+          @click="displayCheck()"
+        >
+          start
+        </button>
+      </span>
+
+      <span>
+        <el-switch
+          style="float: right"
+          v-model="valueAutoBoot"
+          @change="changeStatus()"
+          active-text="continous"
+          inactive-text="single"
+        >
+        </el-switch>
+      </span>
+
+      <span style="float: right">
+        Chart Name
+        <input type="text" name="" id="" ref="ChartName" />
+      </span>
     </div>
     <!-- 左侧按钮 -->
-    <!-- <item-panel /> -->
+    <item-panel />
 
     <div id="canvasPanel" ref="canvasPanel" @dragover.prevent />
     <!-- AAA -->
@@ -579,10 +725,10 @@
 <script>
 import G6 from "@antv/g6";
 import registerFactory from "../../components/graph/graph";
-// import ItemPanel from "./ItemPanel.vue";
+import ItemPanel from "./ItemPanel.vue";
 import axios from "axios";
 import "default-passive-events";
-// import { saveAs } from "file-saver";
+import { saveAs } from "file-saver";
 
 function sleep(time) {
   return new Promise((resolve) => setTimeout(resolve, time));
@@ -590,9 +736,9 @@ function sleep(time) {
 
 export default {
   name: "AllGraph",
-  // components: {
-  //   ItemPanel,
-  // },
+  components: {
+    ItemPanel,
+  },
   data() {
     return {
       mode: "drag-shadow-node",
@@ -1701,6 +1847,83 @@ export default {
       this.nowRow = val;
     },
 
+    // 从数据库中导入指定orderID
+    loadDBJson(_val) {
+      if (_val == null) {
+        _val = this.nowRow.id;
+      }
+      // axios.post('http://localhost:5000/api/load',{
+      axios
+        .post(this.url + "/api/load", {
+          order_id: _val,
+        })
+        .then((res) => {
+          let tmp = res["data"]["msg"];
+          this.handleStringify(tmp);
+          // for (let index = 0; index < tmp['nodes'].length; index++) {
+          //   var keys = Object.keys(tmp['nodes'][index]['labelCfg']);
+          //   for (let j = 0; j < keys.length; j++) {
+          //     let position = keys[j].search('dataConfig')
+          //     if (position >= 0 && this.isJSON(JSON.stringify(tmp['nodes'][index]['labelCfg'][keys[j]]['para']))) {
+          //       tmp['nodes'][index]['labelCfg'][keys[j]]['para'] =
+          //         JSON.stringify(tmp['nodes'][index]['labelCfg'][keys[j]]['para'], null, 2)
+          //     }
+          //   }
+          // }
+          this.currentOrderData = tmp;
+          this.graph.read(tmp);
+          this.currentOrderID = _val;
+        });
+    },
+
+    // 提交至服务器
+    // 让后端做好参数存储至本地路径工作
+    submitDB() {
+      const dat = this.graph.save();
+      // this.currentOrderData = dat
+      for (let index = 0; index < dat["nodes"].length; index++) {
+        var keys = Object.keys(dat["nodes"][index]["labelCfg"]);
+        for (let j = 0; j < keys.length; j++) {
+          let position = keys[j].search("dataConfig");
+          if (
+            position >= 0 &&
+            this.isJSON(dat["nodes"][index]["labelCfg"][keys[j]]["para"])
+          ) {
+            dat["nodes"][index]["labelCfg"][keys[j]]["para"] = JSON.parse(
+              dat["nodes"][index]["labelCfg"][keys[j]]["para"]
+            );
+          }
+        }
+        console.log("!!!", keys);
+      }
+      // axios.post('http://localhost:5000/api/submit', {
+      axios
+        .post(this.url + "/api/submit", {
+          order_name: this.$refs.ChartName.value,
+          // TODO：要获取到当前页面用户
+          user_name: "abc",
+          order_data: dat,
+        })
+        .then((res) => {
+          console.log(res);
+          this.openOrderIDResult(res);
+
+          this.handleStringify(dat);
+          // for (let index = 0; index < dat['nodes'].length; index++) {
+          //   var keys = Object.keys(dat['nodes'][index]['labelCfg']);
+          //   for (let j = 0; j < keys.length; j++) {
+          //     let position = keys[j].search('dataConfig')
+          //     if (position >= 0 && this.isJSON(JSON.stringify(dat['nodes'][index]['labelCfg'][keys[j]]['para']))) {
+          //       dat['nodes'][index]['labelCfg'][keys[j]]['para'] =
+          //         JSON.stringify(dat['nodes'][index]['labelCfg'][keys[j]]['para'])
+          //     }
+          //   }
+          // }
+
+          this.loadDBJson(res["data"]["msg"]);
+        });
+    },
+
     handleStringify(_data) {
       for (let index = 0; index < _data["nodes"].length; index++) {
         var keys = Object.keys(_data["nodes"][index]["labelCfg"]);
@@ -1733,6 +1956,61 @@ export default {
           });
         },
       });
+    },
+
+    //获取当前用户所有存储的order
+    loadFromDB() {
+      // axios.post('http://localhost:5000/api/orders',{
+      axios
+        .post(this.url + "/api/orders", {
+          user_name: "abc",
+        })
+        .then((res) => {
+          this.tableData = res["data"]["msg"];
+          console.log(this.tableData);
+          this.total = res["data"]["msg"].length;
+          console.log(this.total);
+        });
+    },
+
+    // 保存数据
+    saveall() {
+      const nodes = this.graph.findAll("node", (node) => {
+        return node;
+      });
+      const edges = this.graph.findAll("edge", (edge) => {
+        return edge;
+      });
+      const dat = this.graph.save();
+      const j = this.format(JSON.stringify(dat));
+      var FileSaver = require("file-saver");
+
+      var blob = new Blob([JSON.stringify(dat, null, 2)], {
+        type: "text/plain;charset=utf-8",
+      });
+      // var blob = new Blob([j], {type: "text/plain;charset=utf-8"});
+      FileSaver.saveAs(blob, "FlowChart.json");
+    },
+
+    //load
+    loadall() {
+      var s = document.getElementById("file");
+      s.click();
+      s.addEventListener(
+        "change",
+        (handleFiles) => {
+          var selectedFile = document.getElementById("file").files[0]; //获取读取的File对象
+          var reader = new FileReader(); //这里是核心！！！读取操作就是由它完成的。
+          // 赋予参数！
+          reader.gr = this.graph;
+          reader.readAsText(selectedFile); //读取文件的内容
+          reader.onload = function () {
+            const _json = JSON.parse(this.result);
+            this.gr.read(_json);
+          };
+        },
+        false
+      );
     },
 
     format(str) {
