@@ -2545,7 +2545,6 @@ export default {
 .canvas-container{
   border-radius: 10px; 
   margin-top: -100px; 
-  width: 150%
 }
 .canvas-dialog{
   width: 1000px !important
