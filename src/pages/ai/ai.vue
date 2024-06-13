@@ -15,6 +15,7 @@
         <el-col :span="14">
           <div class="grid-content opt-title" >{{ optimizationTitle }}</div>
           <el-divider></el-divider>
+
           <div :span="10" class="step-bar">
             <el-steps :active="active" finish-status="success" align-center>
               <el-step :title=step1 ></el-step>
@@ -45,7 +46,7 @@
                       <el-button
                         style="position :absolute; margin-left: 90%"
                         class="rounded-right-button"
-                        @click="dialogTableVisible = true;"
+                        @click="dialogTableVisible = true; showUrl()"
                       >
                     <i class="el-icon-edit"></i>
                   </el-button>
@@ -61,7 +62,7 @@
                           <div>
                             <iframe
                               id="idKetcher"
-                              src="./#/standalone/index.html"
+                              src='/standalone/index.html'
                               width="100%"
                               height="580"
                             />
@@ -801,17 +802,20 @@
                     </span>
                   </el-dialog>
                 </div>
-                <div id="button1" style="position:relative; height: 560px;">
+                <div style="position:relative; height: 560px;">
+                <!-- <div id="button1" style="position:relative; height: 560px;"> -->
+                  <div>
+                    <!-- <AllGraph></AllGraph> -->
                     <iframe
+                      scrolling="no"
                       ref="iframedom"
-                      src="/#/graph-canvas"
+                      src="./#/graph-canvas"
                       id="frames"
-                      frameborder="1"
                       class="occupy"
                       style="position:absolute;"
                       >
                     </iframe>
-
+                  </div>
                   <div id="cover" style="position:absolute; height: 560px; width: 100%; background-color: #f4f5f6; "></div>
                 </div>
 
@@ -866,12 +870,15 @@
 </template>
 
 <script>
+import Vue from 'vue';
+
 import axios from "axios";
 import conf from "../../config";
 import lodash from "lodash";
 import DevicePixelRatio from '../../utils/devicePixelRatio'
 import draggable from '../../utils/draggable';
-
+import AllGraph from '../graph/graphCanvas.vue';
+Vue.component("AllGraph", AllGraph);
 export default {
   directives: {
       draggable,
@@ -1137,6 +1144,10 @@ export default {
     };
   },
   methods: {
+    showUrl(){
+      let tmp = document.getElementById("idKetcher")
+      console.log('...',tmp)
+    },
     initRatio(){
         if (window.devicePixelRatio < 1) {
             this.ratioHeight = this.ratioHeight /  window.devicePixelRatio
@@ -1416,6 +1427,7 @@ export default {
         this.inputsmiles = res;
         let tmpArr = this.inputsmiles.split(">>");
         this.emptyAlert(this.inputsmiles);
+        console.log("url", this.url);
         axios
           .post(this.url + "/input-optimization/smiles2img", {
             smiles: this.inputsmiles,
@@ -1440,6 +1452,7 @@ export default {
       this.fullscreenLoading = true;
       this.imgArr = [];
       this.emptyAlert(this.inputsmiles);
+      console.log("url", this.url);
       axios
         .post(this.url + "/input-optimization/smiles2img", {
           smiles: this.inputsmiles,
@@ -1495,6 +1508,7 @@ export default {
     },
 
     smiles2backend(_smiles) {
+      console.log("url", this.url);
       axios
         .post(this.url + "/input-optimization/smiles2img", {
           smiles: _smiles,
@@ -2108,10 +2122,10 @@ export default {
       this.active = 6;
       this.activeName = "seventh";
       document.getElementById("frames").style.height = "540px";
-      // document.getElementById("frames").style.visibility = "";
-      document.getElementById("button1").style.visibility = "";
-      document.getElementById("button1").style.height = 0;
-      document.getElementById("cover").style.height = 0;
+      document.getElementById("frames").style.visibility = "";
+      // document.getElementById("button1").style.visibility = "";
+      // document.getElementById("button1").style.height = 0;
+      // document.getElementById("cover").style.height = 0;
       document.getElementById("cover").style.visibility = "hidden";
       // })
 
@@ -2165,7 +2179,7 @@ export default {
           id: "vue",
           success: true,
         },
-        "./graph-canvas"
+        "./#/graph-canvas"
       );
     },
 
@@ -2491,8 +2505,10 @@ export default {
       false
     );
 
-    document.getElementById("frames").src = "/#/graph-canvas";
-    document.getElementById("display").src = "/#/display";
+    // document.getElementById("frames").src = "./#/graph-canvas";
+    document.getElementById("display").src = "./#/display";
+    document.getElementById("cover").style.height = 0;
+
     this.hideTabs();
   },
 };
