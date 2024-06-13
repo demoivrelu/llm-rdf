@@ -62,7 +62,7 @@
                           <div>
                             <iframe
                               id="idKetcher"
-                              src='/standalone/index.html'
+                              src='/llm-rdf/standalone/index.html'
                               width="100%"
                               height="580"
                             />
