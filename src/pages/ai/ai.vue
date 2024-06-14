@@ -57,7 +57,6 @@
                         <el-dialog
                           :title="canvasTitle"
                           class="canvas-container"
-                          custom-class="canvas-dialog"
                           :visible.sync="dialogTableVisible"
                           v-draggable
                           >
