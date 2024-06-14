@@ -2549,10 +2549,6 @@ export default {
   margin-top: -100px; 
 
 }
-.canvas-dialog{
-  width: 1000px !important
-  
-}
 
 .canvas-footer{
   position:relative; 
