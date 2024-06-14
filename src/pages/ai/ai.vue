@@ -1826,15 +1826,22 @@ export default {
       //create reaction space json
       this.checkRange();
       console.log("tounchained", this.retStep);
-      axios
-        .post(this.url + "/input-optimization/unchained", {
-          step: this.retStep,
-        })
-        .then((res) => {
-          this.writeUnchainedParaMod(
-            "synthesis", res['data']
-          );
-        });
+
+      let data = require("../../jsonFomatter/unchained.json");
+      this.writeUnchainedParaMod(
+        "synthesis", data
+      );
+
+      // axios
+      //   .post(this.url + "/input-optimization/unchained", {
+      //     step: this.retStep,
+      //   })
+      //   .then((res) => {
+      //     this.downJson(res['data']);
+      //     this.writeUnchainedParaMod(
+      //       "synthesis", res['data']
+      //     );
+      //   });
 
       console.log(" 2 json to backend created: ", this.retStep, this.getTime);
       console.log("reaction space json created:", this.getSpace);
