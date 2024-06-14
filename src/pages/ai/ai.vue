@@ -811,7 +811,7 @@
                     <iframe
                       scrolling="no"
                       ref="iframedom"
-                      src="https://demoivrelu.github.io/llm-rdf/#/graph-canvas"
+                      src=""
                       id="frames"
                       class="occupy"
                       style="position:absolute;"
@@ -2100,6 +2100,7 @@ export default {
     },
 
     getFlowchart() {
+      document.getElementById("frames").src = "https://demoivrelu.github.io/llm-rdf/#/graph-canvas";
       // HPLC PARA:
       console.log("HPLC PARA: ", this.hplcPara)
       this.dataAnalysis["para"] = this.hplcPara

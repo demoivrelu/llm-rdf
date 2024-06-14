@@ -742,31 +742,31 @@ export default {
       this.graph.read(require("../../jsonFomatter/flowchart_arops.json"));
     });
 
-    window.addEventListener(
-      "message",
-      (event) => {
-        if (event.data.type == "send") {
-          // Stringfy parameter
-          this.listRobot1ParaMod = this.handleListDataStringify(
-            event.data.message.listRobot1ParaMod
-          );
-          this.listThermoParaMod = this.handleListDataStringify(
-            event.data.message.listThermoParaMod
-          );
-          this.listUnchainedParaMod = this.handleListDataStringify(
-            event.data.message.listUnchainedParaMod
-          );
+    // window.addEventListener(
+    //   "message",
+    //   (event) => {
+    //     if (event.data.type == "send") {
+    //       // Stringfy parameter
+    //       this.listRobot1ParaMod = this.handleListDataStringify(
+    //         event.data.message.listRobot1ParaMod
+    //       );
+    //       this.listThermoParaMod = this.handleListDataStringify(
+    //         event.data.message.listThermoParaMod
+    //       );
+    //       this.listUnchainedParaMod = this.handleListDataStringify(
+    //         event.data.message.listUnchainedParaMod
+    //       );
 
-          this.graph.read(event.data.message.flowchart);
-          // const _ = require("lodash");
-          // this.ret2OptData = _.cloneDeep(event.data.message.flowchart);
-        }
-        if (event.data.type == "sig") {
-          this.retFlowchart2Opt();
-        }
-      },
-      false
-    );
+    //       this.graph.read(event.data.message.flowchart);
+    //       // const _ = require("lodash");
+    //       // this.ret2OptData = _.cloneDeep(event.data.message.flowchart);
+    //     }
+    //     if (event.data.type == "sig") {
+    //       this.retFlowchart2Opt();
+    //     }
+    //   },
+    //   false
+    // );
 
     setInterval(() => {
       this.getOrderStatus();
