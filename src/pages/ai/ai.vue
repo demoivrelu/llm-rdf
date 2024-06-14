@@ -2190,89 +2190,126 @@ export default {
       this.$refs.tabs.$children[0].$el.style.display = "none";
     },
 
+    downJson(_data){
+      const data = { name: 'John', age: 30 };
+      const jsonData = JSON.stringify(_data);
+      
+      // 创建Blob对象并写入JSON数据
+      const blob = new Blob([jsonData], { type: 'application/json' });
+      
+      // 创建下载链接并设置相关属性
+      const downloadLink = document.createElement('a');
+      downloadLink.href = URL.createObjectURL(blob);
+      downloadLink.download = 'data.json';
+      
+            // 模拟点击下载链接
+      downloadLink.click();
+    },
+
     nlp2procedure() {
       let reqInstance = axios.create({
         headers: {
           "Content-Type": "application/x-www-form-urlencoded",
         },
       });
-      axios
-        .post(this.url + "/input-optimization/nlp2procedure", {
-          nlp: this.textarea1Synthesis,
-          operation: 'synthesis'
-        })
-        .then((res) => {
-          this.getGPTSynthesisRes = res["data"];
-          // this.getGPTSynthesisRes = require("../../jsonFomatter/gpt.json");
-          this.textarea2Synthesis = this.getGPTSynthesisRes["procedure"];
-          // this.writeUnchainedParaMod(
-          //   "synthesis",
-          //   this.getGPTSynthesisRes["parameter"]
-          // );
-        });
-      axios
-        .post(this.url + "/input-optimization/nlp2procedure", {
-          nlp: this.textarea1Workup,
-          operation: 'workup'
-        })
-        .then((res) => {
-          this.getGPTWorkupRes = res["data"];
-          this.textarea2Workup = this.getGPTWorkupRes["procedure"];
-          this.writeUnchainedParaMod(
-            "workup",
-            this.getGPTWorkupRes["parameter"]
-          );
-          console.log(this.listUnchainedParaMod);
-        });
+      this.getGPTSynthesisRes = require("../../jsonFomatter/gpt.json");
+      this.textarea2Synthesis = this.getGPTSynthesisRes["procedure"];
+      // axios
+      //   .post(this.url + "/input-optimization/nlp2procedure", {
+      //     nlp: this.textarea1Synthesis,
+      //     operation: 'synthesis'
+      //   })
+      //   .then((res) => {
+      //     console.log(res["data"])
+      //     this.getGPTSynthesisRes = res["data"];
+      //     this.textarea2Synthesis = this.getGPTSynthesisRes["procedure"];
+      //     // this.writeUnchainedParaMod(
+      //     //   "synthesis",
+      //     //   this.getGPTSynthesisRes["parameter"]
+      //     // );
+      //   });
+
+      this.getGPTWorkupRes = require("../../jsonFomatter/gpt-workup.json");
+      this.textarea2Workup = this.getGPTWorkupRes["procedure"];
+      this.writeUnchainedParaMod(
+        "workup",
+        this.getGPTWorkupRes["parameter"]
+      );
+      // axios
+      //   .post(this.url + "/input-optimization/nlp2procedure", {
+      //     nlp: this.textarea1Workup,
+      //     operation: 'workup'
+      //   })
+      //   .then((res) => {
+      //     this.getGPTWorkupRes = res["data"];
+      //     this.textarea2Workup = this.getGPTWorkupRes["procedure"];
+      //     this.writeUnchainedParaMod(
+      //       "workup",
+      //       this.getGPTWorkupRes["parameter"]
+      //     );
+      //     console.log(this.listUnchainedParaMod);
+      //   });
     },
 
     nlp2space() {
       console.log("post  nlp2spase  >>>>> ", this.getGPTSynthesisRes["action"])
-      axios
-        .post(this.url + "/input-optimization/nlp2space", {
-          nlp: this.variableAndRange,
-          action: this.getGPTSynthesisRes["action"]
-        })
-        .then((res) => {
-          this.checkTime = res['data']['time'] //True
-          // this.getSpace = res['data']['space']
-          // [{'name': 'Time', 'type': 'continuous', 'range': [60, 80]},
-          //  {'name': 'volume of Base', 'type': 'continuous', 'range': [0.5, 2]},
-          //  {'name': 'Cu Catalyst', 'type': 'categorical', 'range': ['CuBr', 'CuBr2']},
-          //  {'name': 'Base', 'type': 'categorical', 'range': ['NMI', 'DBU']}]
-          // this.getAction = res['data']['action']
 
-          // {'1': {'action': 'dispense', 'num': 0.25, 'unit': 'ml', 'name': 'Cu catalyst', 'tag': 'SyringePump,ExtSingleTip', 'checkParameter': False, 'checkReagent': True},
-          //'2': {'action': 'dispense', 'num': 0.25, 'unit': 'ml', 'name': 'TEMPO', 'tag': 'SyringePump,ExtSingleTip', 'checkParameter': False, 'checkReagent': False},
-          //'3': {'action': 'dispense', 'num': 'parameter', 'unit': 'ml', 'name': 'Base', 'tag': 'SyringePump,ExtSingleTip', 'checkParameter': True, 'checkReagent': True}}
-          const _ = require("lodash");
-          this.dataStepFromGPT = _.cloneDeep(res['data']['action'])
-          this.dataSpaceFromGPT = _.cloneDeep(res['data']['space'])
-          this.dataTimeFromGPT = _.cloneDeep(res['data']['time'])
+      let data = require("../../jsonFomatter/gpt-space.json");
+      this.checkTime = data["time"];
+      const _ = require("lodash");
+      this.dataStepFromGPT = _.cloneDeep(data['action'])
+      this.dataSpaceFromGPT = _.cloneDeep(data['space'])
+      this.dataTimeFromGPT = _.cloneDeep(data['time'])
+      this.$message({
+        message: this.gpt2spaceAlarm[0],
+        type: 'success'
+      });
 
-          // this.$confirm(this.gpt2spaceAlarm[0], this.gpt2spaceAlarm[1], {
-          //   customClass: 'confirm-dialog',
-          //   confirmButtonText: this.gpt2spaceAlarm[3],
-          //   cancelButtonText: this.gpt2spaceAlarm[2],
-          //   type: "success",
+      // axios
+      //   .post(this.url + "/input-optimization/nlp2space", {
+      //     nlp: this.variableAndRange,
+      //     action: this.getGPTSynthesisRes["action"]
+      //   })
+      //   .then((res) => {
+      //     this.checkTime = res['data']['time'] //True
+      //     // this.getSpace = res['data']['space']
+      //     // [{'name': 'Time', 'type': 'continuous', 'range': [60, 80]},
+      //     //  {'name': 'volume of Base', 'type': 'continuous', 'range': [0.5, 2]},
+      //     //  {'name': 'Cu Catalyst', 'type': 'categorical', 'range': ['CuBr', 'CuBr2']},
+      //     //  {'name': 'Base', 'type': 'categorical', 'range': ['NMI', 'DBU']}]
+      //     // this.getAction = res['data']['action']
 
-          // })
-          //   .then(() => {
-          //     // reset
-          //     // axios.post(this.url + "/api/****").then((res) => {
-          //     //   console.log(res)
-          //     // this.handleData(this.currentID);
-          //       this.$message({
-          //         type: "success",
-          //         message: "confirm",
-          //       // });
-          // });
-          //   });
-          this.$message({
-            message: this.gpt2spaceAlarm[0],
-            type: 'success'
-          });
-        });
+      //     // {'1': {'action': 'dispense', 'num': 0.25, 'unit': 'ml', 'name': 'Cu catalyst', 'tag': 'SyringePump,ExtSingleTip', 'checkParameter': False, 'checkReagent': True},
+      //     //'2': {'action': 'dispense', 'num': 0.25, 'unit': 'ml', 'name': 'TEMPO', 'tag': 'SyringePump,ExtSingleTip', 'checkParameter': False, 'checkReagent': False},
+      //     //'3': {'action': 'dispense', 'num': 'parameter', 'unit': 'ml', 'name': 'Base', 'tag': 'SyringePump,ExtSingleTip', 'checkParameter': True, 'checkReagent': True}}
+      //     const _ = require("lodash");
+      //     this.dataStepFromGPT = _.cloneDeep(res['data']['action'])
+      //     this.dataSpaceFromGPT = _.cloneDeep(res['data']['space'])
+      //     this.dataTimeFromGPT = _.cloneDeep(res['data']['time'])
+
+      //     // this.$confirm(this.gpt2spaceAlarm[0], this.gpt2spaceAlarm[1], {
+      //     //   customClass: 'confirm-dialog',
+      //     //   confirmButtonText: this.gpt2spaceAlarm[3],
+      //     //   cancelButtonText: this.gpt2spaceAlarm[2],
+      //     //   type: "success",
+
+      //     // })
+      //     //   .then(() => {
+      //     //     // reset
+      //     //     // axios.post(this.url + "/api/****").then((res) => {
+      //     //     //   console.log(res)
+      //     //     // this.handleData(this.currentID);
+      //     //       this.$message({
+      //     //         type: "success",
+      //     //         message: "confirm",
+      //     //       // });
+      //     // });
+      //     //   });
+      //     this.$message({
+      //       message: this.gpt2spaceAlarm[0],
+      //       type: 'success'
+      //     });
+      //   });
     },
     writeUnchainedParaMod(_name, _para) {
       let i = 0;
