@@ -1646,7 +1646,7 @@ export default {
 
 <style lang="scss">
 @import url(../../assets/font_viut27d3a7/iconfont.css);
-@import url("http://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap");
+// @import url("https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap");
 
 .iconfont {
     color: var(--side-text-color);
