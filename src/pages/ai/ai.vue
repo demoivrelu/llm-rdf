@@ -57,6 +57,7 @@
                         <el-dialog
                           :title="canvasTitle"
                           class="canvas-container"
+                          custom-class="canvas-dialog"
                           :visible.sync="dialogTableVisible"
                           v-draggable
                           >
@@ -2547,6 +2548,10 @@ export default {
   border-radius: 10px; 
   margin-top: -100px; 
 
+}
+
+.canvas-dialog{
+  width: 1000px;
 }
 
 .canvas-footer{
