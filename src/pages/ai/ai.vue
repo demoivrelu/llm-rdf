@@ -36,6 +36,7 @@
                     <el-col @submit.native.prevent>
                       <div style="position: relative">
                         <el-input
+                          id="smiles-input"
                           style="position: absolute"
                           :placeholder="inputPlaceholder"
                           v-model="inputsmiles"
@@ -56,6 +57,7 @@
                         <el-dialog
                           :title="canvasTitle"
                           class="canvas-container"
+                          custom-class="canvas-dialog"
                           :visible.sync="dialogTableVisible"
                           v-draggable
                           >
@@ -86,10 +88,10 @@
                         style="visibility: hidden"
                         class="equation-img"
                         >
-                        <el-image :src="imgArr[0]"></el-image>
-                        <!-- <canvas id="equation_src"></canvas> -->
-                        <!-- <el-image :src="img_arrow"></el-image> -->
-                        <!-- <canvas id="equation_dst"></canvas> -->
+                        <!-- <el-image :src="imgArr[0]"></el-image> -->
+                        <canvas id="equation_src"></canvas>
+                        <el-image :src="img_arrow"></el-image>
+                        <canvas id="equation_dst"></canvas>
                       </div>
                     </div>
 
@@ -809,7 +811,7 @@
                     <iframe
                       scrolling="no"
                       ref="iframedom"
-                      src="./#/graph-canvas"
+                      src="https://demoivrelu.github.io/llm-rdf/#/graph-canvas"
                       id="frames"
                       class="occupy"
                       style="position:absolute;"
@@ -1083,7 +1085,8 @@ export default {
       ketcher: null,
       fullscreenLoading: false,
       img_url: "./img/smiles2img/blank.png",
-      img_arrow: "./img/smiles2img/arrow_trans.png",
+      img_arrow: require('@/assets/img/smiles2img/arrow_trans.png'),
+      // img_arrow: "/img/smiles2img/arrow_trans.png",
       imgArr: [],
       currentRow: {},
       optimizationTitle: 'Reaction self-optimization',
@@ -1486,9 +1489,11 @@ export default {
       this.ketcher.getSmiles().then((res) => {
         this.inputsmiles = res;
         if (!this.emptyAlert(this.inputsmiles)) {
-          // this.handleJSRDKit()
-          this.smiles2backend(this.inputsmiles);
+          this.handleJSRDKit()
+          // this.smiles2backend(this.inputsmiles);
         }
+        this.fullscreenLoading = false;
+        this.active = 0;
       });
     },
 
@@ -1496,19 +1501,21 @@ export default {
       this.fullscreenLoading = true;
       this.imgArr = [];
       if (!this.emptyAlert(this.inputsmiles)) {
-        // this.handleJSRDKit()
-        this.smiles2backend(this.inputsmiles);
+        this.handleJSRDKit()
+        // this.smiles2backend(this.inputsmiles);
       }
+      this.fullscreenLoading = false;
+      this.active = 0;
     },
-
-    handleJSRDKit(){
+      
+    async handleJSRDKit(){
       let tmpArr = this.inputsmiles.split(">>");
-      this.drawCanvas("equation_src", tmpArr[0]);
-      this.drawCanvas("equation_dst", tmpArr[1]);
+      await this.drawCanvas("equation_src", tmpArr[0]);
+      await this.drawCanvas("equation_dst", tmpArr[1]);
+      document.getElementById("equation").style.visibility = "";
     },
 
     smiles2backend(_smiles) {
-      console.log("url", this.url);
       axios
         .post(this.url + "/input-optimization/smiles2img", {
           smiles: _smiles,
@@ -1527,29 +1534,25 @@ export default {
     },
 
     drawCanvas(_name, _smiles) {
-      console.log("sad")
       window
         .initRDKitModule()
         .then(function (RDKitModule) {
-            var mol = RDKitModule.get_mol(_smiles);
-            const canvas = document.getElementById(_name);
-            mol.draw_to_canvas(canvas, -1, -1);
-            const ctx = canvas.getContext('2d');
-            const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-            const data = imageData.data;
-            for (let i = 0; i < data.length; i += 4) {
-                const red = data[i];
-                const green = data[i + 1];
-                const blue = data[i + 2];
-                if (red === 255 && green === 255 && blue === 255) {
-                    data[i + 3] = 0; 
-                }
-            }
-            ctx.putImageData(imageData, 0, 0);
-        })
-        .catch(() => {
-            // handle loading errors here...
-        });
+          var mol = RDKitModule.get_mol(_smiles);
+          const canvas = document.getElementById(_name);
+          mol.draw_to_canvas(canvas, -1, -1);
+          const ctx = canvas.getContext('2d');
+          const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+          const data = imageData.data;
+          for (let i = 0; i < data.length; i += 4) {
+              const red = data[i];
+              const green = data[i + 1];
+              const blue = data[i + 2];
+              if (red === 255 && green === 255 && blue === 255) {
+                  data[i + 3] = 0; 
+              }
+          }
+          ctx.putImageData(imageData, 0, 0);
+      })
     },
 
     simpleAlert() {
@@ -2544,6 +2547,11 @@ export default {
 .canvas-container{
   border-radius: 10px; 
   margin-top: -100px; 
+
+}
+.canvas-dialog{
+  width: 1000px !important
+  
 }
 
 .canvas-footer{

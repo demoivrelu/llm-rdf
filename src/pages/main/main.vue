@@ -1188,7 +1188,7 @@ export default {
         },
 
         toCC() {
-            this.routerJumper = './cc'
+            this.routerJumper = './#/cc'
             this.hideDiv()
             this.putBottom()
             document.getElementById("frames-cc").style.visibility = ""
@@ -1196,7 +1196,7 @@ export default {
         },
 
         toCommon() {
-            this.routerJumper = './common'
+            this.routerJumper = './#/common'
             this.hideDiv()
             this.putBottom()
             document.getElementById("frames-common").style.visibility = ""
@@ -1205,7 +1205,7 @@ export default {
 
         toOptimization() {
             this.activeName = "third"
-            this.routerJumper = '/#/ai'
+            this.routerJumper = '/ai'
             // this.hideDiv()
             // this.putBottom()
             // document.getElementById("frames").style.visibility = ""
@@ -1215,7 +1215,7 @@ export default {
 
         toScreener() {
             this.activeName = "fifth"
-            this.routerJumper = '/#/screener'
+            this.routerJumper = '/screener'
             // this.hideDiv()
             // this.putBottom()
             // document.getElementById("screener-page").style.visibility = ""
@@ -1225,7 +1225,7 @@ export default {
 
         toOpenWebUI(_type) {
             this.activeName = "second"
-            this.routerJumper = '/#/3rdPartAI'
+            this.routerJumper = '/3rdPartAI'
             this.sendTypeSig("3rdPartUI-dom", _type)
         },
         // toOpenWebUI(_type) {
@@ -1306,7 +1306,7 @@ export default {
             console.log("sadasd", _val)
             let _type = this.nowRow.type
             if (_type == "Optimization") {
-                this.routerJumper = './display'
+                this.routerJumper = './#/display'
                 this.hideDiv()
                 this.putBottom()
                 document.getElementById("opt-display").style.visibility = ""
@@ -1316,7 +1316,7 @@ export default {
                 this.sendProjectSig("opt-display-dom", this.nowRow)
             }
             if (_type == "Screen") {
-                this.routerJumper = './display-screener'
+                this.routerJumper = './#/display-screener'
                 this.hideDiv()
                 this.putBottom()
                 document.getElementById("opt-display-s").style.visibility = ""
@@ -1325,7 +1325,7 @@ export default {
                 this.sendProjectSig("opt-display-dom-s", this.nowRow)
             }
             if (_type == "General") {
-                this.routerJumper = './general-display'
+                this.routerJumper = './#/general-display'
                 this.hideDiv()
                 this.putBottom()
                 document.getElementById("gen-display").style.visibility = ""
@@ -1346,7 +1346,7 @@ export default {
                 })
             }
             if (_type == "Common"){
-                this.routerJumper = './display-common'
+                this.routerJumper = './#/display-common'
                 this.hideDiv()
                 this.putBottom()
                 document.getElementById("common-display").style.visibility = ""
@@ -1358,7 +1358,7 @@ export default {
         handleDetail(){
             let _type = this.nowRow.type
             if (_type == "Optimization") {
-                this.routerJumper = './display'
+                this.routerJumper = './#/display'
                 this.hideDiv()
                 this.putBottom()
                 document.getElementById("opt-display").style.visibility = ""
@@ -1368,7 +1368,7 @@ export default {
                 this.sendProjectSig("opt-display-dom", this.nowRow)
             }
             if (_type == "Screen") {
-                this.routerJumper = './display-screener'
+                this.routerJumper = './#/display-screener'
                 this.hideDiv()
                 this.putBottom()
                 document.getElementById("opt-display-s").style.visibility = ""
