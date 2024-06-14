@@ -739,6 +739,7 @@ export default {
     this.$nextTick(() => {
       this.createGraphic();
       this.initGraphEvent();
+      this.graph.read(require("../../jsonFomatter/flowchart_arops.json"));
     });
 
     window.addEventListener(
