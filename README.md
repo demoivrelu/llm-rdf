@@ -18,5 +18,14 @@ The code and data repository of "Accelerated end-to-end chemical synthesis devel
 3. (Recommended)`npm install -g npm@6.14.14`
 4. `npm install` 
 5. `npm run dev`
+
+## Use Docker
+
+1. docker pull demoivrelu/llm:v0.1
+2. docker run --name display -d -p 9090:80 demoivrelu/llm:v0.1
+
+​	In browser:	http://localhost:9090/#/main
+
 ## License
+
 LLM-RDF is distributed under an MIT License.
